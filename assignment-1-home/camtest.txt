@@ -1,0 +1,82 @@
+var cameraPos = {};
+var center = {};
+var dir = {};
+
+function setup() {
+  createCanvas(300, 300, WEBGL);
+  
+  debugMode();
+  
+    cameraPos = {
+    x: 0,
+    y: 0,
+    //z: (height/2.0) / tan(PI*30.0 / 180.0)
+    z: 100
+  };
+  //center of sketch. camera points here. align with placement to kind of move cohesively.
+  center = {
+    x: 0,
+    y: 0,
+    z: 0
+  }
+  //orientation of camera. like as if you moved it sideway, etc. prob don't mess 
+  dir = {
+    x: 0,
+    y: 0,
+    z: 0
+  }
+}
+
+function draw() {
+  background(0);
+  
+  
+  camera(cameraPos.x,cameraPos.y,cameraPos.z, center.x,center.y, center.z, dir.x, dir.y, dir.z)
+  
+  
+  push ();
+  translate(0,0, -100)
+  fill(50);
+  strokeWeight(2);
+  stroke(130);
+  
+  let u = width;
+  for (var y=0; y< 50; y++){
+    for (var x=0; x< 50 ; x++){
+       rect(x*u, y*u, u, u)
+    }
+  }
+
+  // plane(width*100, height*100);
+  pop ();
+  
+//   push ();
+//   // translate(0,-100, 0)
+//   rotateX(PI/2);
+//   fill('red');
+//   plane(width, height*100);
+//   pop ();
+  
+}
+
+function keyPressed() {
+    if (key == 'ArrowLeft'){
+      cameraPos.x -= 40;
+      center.x -= 40;
+    }
+    if (key == 'ArrowRight'){
+      cameraPos.x += 40;
+      center.x += 40;
+    }
+    if (key == 'ArrowUp'){
+      cameraPos.y += 20;
+      center.y += 20;
+  
+    }    
+    if (key == 'ArrowDown'){
+      // cameraPos.y += 40;
+      cameraPos.y -= 40;
+      center.y = 40;
+    }       
+
+}
