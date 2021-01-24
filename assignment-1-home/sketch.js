@@ -44,7 +44,7 @@ scrolly
 
 function canvasAll(c) {
 
-  let r = 40;
+  let r = 60;
   let numPts = 50;
   let angleInc = 360/numPts;
   var noiseoff = 0;
@@ -113,7 +113,7 @@ function canvasAll(c) {
       if (r < 200){
         r = r*1.01;
       } else {
-        r = 40;
+        r = 60;
       }
     }
 

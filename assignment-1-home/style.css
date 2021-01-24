@@ -3,9 +3,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap');
 
 
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;500;600&display=swap');
+
 body {
   background: #121213; 
-  font-family: 'Inter';
+  font-family: 'Fraunces';
   color: #e5e5e5;
   font-weight: 300;
   font-size: 16px;
@@ -33,7 +35,7 @@ h1, h1 span {
 
 main {
   max-width: 950px;
-  width: 80%;
+  width: 85%;
   margin: auto;
 }
 
@@ -69,7 +71,7 @@ main {
 
 .card {
   height: 80vh;
-  font-size: 40px;
+  font-size: 36px;
   /* width: 30%; */
   margin-right: 20px;
   padding-bottom: 15px;
@@ -90,11 +92,11 @@ main {
 
 /* 
   text-decoration: underline;
-  text-decoration-color: gray; */
+  text-decoration-color: #9f9f9f; */
  
 }
 .card-text {
-  color: gray;
+  color: #9f9f9f;
 }
 
 .card-visual {
@@ -108,7 +110,7 @@ main {
 .more-stuff {
   background: #121213;
   padding-top: 400px;
-  color: gray;
+  color: #9f9f9f;
 }
 .lowlight {
   color: white;
