@@ -1,74 +1,115 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-* {
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+
+
+body {
+  background: #121213; 
   font-family: 'Inter';
   color: #e5e5e5;
   font-weight: 300;
   font-size: 16px;
 }
 
-body {
-  background: #121213; 
-}
-
 
 .header-row {
   margin: 40px 0;
-}
-h1, h1 span {
-  font-size: 30px;
-  font-weight: 400;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  background: #121213cf;
+  background: #121213;
 }
 
-.color-text {
-  text-decoration: underline;
-  text-decoration-color: #727467;
+h1, h1 span {
+  font-size: 50px;
+  font-weight: 300;
 }
+
+  /* .color-text {
+    text-decoration: underline;
+    text-decoration-color: #727467;
+  } */
 
 main {
   max-width: 950px;
-  width: 90%;
+  width: 80%;
   margin: auto;
 }
 
 .card-row {
-  width: 100%;
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-basis: 100%; 
+}
+#scrolly {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
+
+#vis-holder {
+  position: fixed;
+
+  height: 100%;
+
+  z-index: -1;
+  top: 0;
+  overflow: visible;
+
+  width: 80%;
+  margin: auto;
+  left: 10%;
+
+}
+
 .card {
-  height: 400px;
-  background: #414446;
-  width: 30%;
+  height: 80vh;
+  font-size: 40px;
+  /* width: 30%; */
   margin-right: 20px;
   padding-bottom: 15px;
-  /* padding: 25px 25px; */
-  opacity: .7;
-  cursor: pointer;
-  transition: box-shadow .15s linear, opacity .15s linear;
-}
-.card:hover {
-  opacity: 1;
-  box-shadow: 0 2px 3px 2px #00000024;
-}
 
+
+  transition: box-shadow .15s linear;
+  margin-bottom: 80px;
+}
+.card.elusive {
+  margin-top: 500px;
+}
 
 .card-header {
-  font-size: 20px;
-  font-weight: 500;
-  padding: 15px 25px;
-  background: #333638;
-  margin-bottom: 25px;
+
+  font-weight: 400;
+  margin-bottom: 30px;
+  color: white;
+
+/* 
+  text-decoration: underline;
+  text-decoration-color: gray; */
+ 
 }
-.card-body {
-  padding: 0 25px;
+.card-text {
+  color: gray;
 }
+
 .card-visual {
   width: 100%;
   height: 200px;
   background: black;
   margin: auto;
   margin-bottom: 15px;
+}
+
+.more-stuff {
+  background: #121213;
+  padding-top: 400px;
+  color: gray;
+}
+.lowlight {
+  color: white;
 }

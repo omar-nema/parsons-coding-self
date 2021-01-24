@@ -11,53 +11,83 @@
             <h1>My <span class="color-text">dream home</span> is...</h1>  
         </div>
     
-        <div class="card-row">
-            <div class="card elusive">
-                <div class="card-header">
-                    Elusive
-                </div>
-                <div class="card-body">
-                    <div class="card-visual">
-                        <div id="body-elusive"></div>
+        <div id="scrolly">
+            <div class="card-row">
+                <div class="card elusive">
+                    <div class="card-header">
+                        Elusive
                     </div>
-                    <div class="card-text">
-                        Building a home is a never-ending search. An established, fixed home feels unattainable, but I will keep searching for it.
+                    <div class="card-body">
+                     
+                        <div class="card-text">
+                            Building a home is a never-ending search. An established, fixed home feels unattainable. 
+                        </div>
                     </div>
-                </div>
-     
-            </div>
-            <div class="card expansive">
-                <div class="card-header">
-                    Expansive
-                </div>
-                <div class="card-body">
-                    <div class="card-visual">
-                        <div  id="canvas-expansive"></div>
-                    </div>
-                    <div class="card-text">
-                        Home is constantly expanding as my experiences and relationships grow. 
-                    </div>
-                </div>
- 
-            </div>
-            <div class="card amor">
-                <div class="card-header">
-                    Amorphous
-                </div>
-                <div class="card-body">
-                    <div class="card-visual">
-                        <div id="canvas-amorphous"></div>
-                    </div>
-                    <div class="card-text">
-                        Home has no edges. It shifts and morphs gradually, taking on new forms.
-                    </div>
-                </div>
         
-            </div>            
+                </div>
+                <div class="card expansive">
+                    <div class="card-header">
+                        Expansive
+                    </div>
+                    <div class="card-body">
+                     
+                        <div class="card-text">
+                            Home is constantly expanding as my experiences and relationships grow. 
+                        </div>
+                    </div>
+    
+                </div>
+                <div class="card amor">
+                    <div class="card-header">
+                        Amorphous
+                    </div>
+                    <div class="card-body">
+                 
+                        <div class="card-text">
+                            Home has no edges. It shifts and morphs gradually, taking on new forms.
+                        </div>
+                    </div>
+            
+                </div>   
+                
+                <!-- <div class="card-invis">
+                    <div>
+                        Over time, home eludes, expands, and morphs. But if I were describe home at this moment in time, I would say:
+                    </div>
+
+                </div> -->
+            </div>
+            <div id="vis-holder"></div>
+
+       
         </div>
+
+        <div class="more-stuff">
+
+            <div class="card">
+                Across time, home eludes, expands, and morphs.<span class="lowlight">When I dream of home at this moment in time, I think:</span>
+            </div>
+            <div class="card">
+                Home is <span class="lowlight">walls and constraints</span>.
+            </div>    
+            <div class="card">
+                Home is <span class="lowlight">windows and views into other lives</span>.
+            </div> 
+            <div class="card">
+                Home is <span class="lowlight">three-story houses, cracked pavement.</span>
+            </div> 
+            <div class="card">
+                Home is <span class="lowlight">wood, olive green.</span>
+            </div>       
+            <div class="card">
+                Home is <span class="lowlight">"tell me about your day"</span>
+            </div>        
+        </div>        
     </main>
 
 </body>
 </html>
+<script src="https://unpkg.com/intersection-observer"></script>
+<script src="https://unpkg.com/scrollama"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js'></script>
 <script src='./sketch.js'></script>

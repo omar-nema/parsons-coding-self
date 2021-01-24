@@ -1,4 +1,4 @@
-var containerDim = document.querySelector('.card-visual').getBoundingClientRect();
+var containerDim = document.querySelector('#vis-holder').getBoundingClientRect();
 let circleX = containerDim.width/2;
 let circleY = containerDim.height/2;
 let xSpeed = 2;
@@ -6,209 +6,142 @@ let ySpeed = 2;
 let xDir = 1;
 let yDir = 1;
 
+var scrolly = scrollama();
 
-let elusiveHover = false;
-document.querySelector('.card.elusive').onmouseover = ()=> {
-  elusiveHover = true;
-}
-document.querySelector('.card.elusive').onmouseout = function () {
-  elusiveHover = false;
-}
+let stateElusive = false;
+let stateExp = false;
+let stateAmor = false;
 
-let amorHover = false;
-document.querySelector('.card.amor').onmouseover = ()=> {
-  amorHover = true;
-}
-document.querySelector('.card.amor').onmouseout = function () {
-  amorHover = false;
-}
-
-let expHover = false;
-document.querySelector('.card.expansive').onmouseover = ()=> {
-  expHover = true;
-}
-document.querySelector('.card.expansive').onmouseout = function () {
-  expHover = false;
-}
-
-function canvasElusive(c) {
-
-  c.setup = function () {
-    cnv = c.createCanvas(containerDim.width,containerDim.height);
-  }
-
-  c.draw = function () {
-    c.background(20);
-
-    if (elusiveHover){
-      let offset = 40;
-      if (circleX > c.width + offset &&  xDir == 1){
-        xDir = xDir*-1;
-      } 
-      else if (circleX < -offset &&  xDir == -1){
-        xDir = xDir*-1;
-      } 
-      if (circleY > c.height + offset &&  yDir == 1){
-        yDir = yDir*-1;
-      } 
-      else if (circleY < -offset &&  yDir == -1){
-        yDir = yDir*-1;
-      } 
-      circleX += (xSpeed * xDir);
-      circleY += (ySpeed * yDir);
+scrolly
+  .setup({
+    step: ".card",
+  })
+  .onStepEnter((r) => {
+    elusiveHover = true;
+    if (r.element.classList.contains('elusive')){
+      stateElusive = true;
+    } else {
+      stateElusive = false;
+    }
+    if (r.element.classList.contains('expansive')){
+      stateExp = true;
+    } else {
+      stateExp = false;
     }
 
-    
-    c.fill(40);
-    c.strokeWeight(1.5)
-    c.stroke(255, 180);
-    c.circle(circleX, circleY, 80, 80)
-
-
-    // stuff to draw
-  }
-}
-
-function canvasExpansive(c){
-
-  let diam = 80;
-
-  c.setup = function () {
-    cnv = c.createCanvas(containerDim.width,containerDim.height);
-  }
-
-
-  c.draw = function () {
-    c.background(20);
-
-    c.fill(40);
-    c.strokeWeight(1.5)
-    c.stroke(255, 180);
-    c.circle(c.width/2, c.height/2, diam, diam)
-
-    if (expHover){
-      if (diam < c.width*.8){
-        diam = diam*1.01;
-      } else {
-        diam = 80;
-      }
+    if (r.element.classList.contains('amor')){
+      stateAmor = true;
+    } else {
+      stateAmor = false;
     }
 
-  }
-}
+    // { element, index, direction }
+  })
+  .onStepExit((response) => {
+    // { element, index, direction }
+  });
 
-function canvasAmor(d) {
+
+function canvasAll(c) {
 
   let r = 40;
   let numPts = 50;
   let angleInc = 360/numPts;
-  let noiseoff = 0;
+  var noiseoff = 0;
   let circleObj = [];
+  let centerX;
+  let centerY;
 
-  d.setup = function () {
-    d.createCanvas(containerDim.width,containerDim.height);
-    d.angleMode(d.DEGREES);
+  c.setup = function () {
+    cnv = c.createCanvas(containerDim.width,containerDim.height);
+
+    centerX = c.width/2;
+    centerY = c.height/2;
+
+    c.angleMode(c.DEGREES);
     for (let i=0; i<numPts+1; i++){
       let a = angleInc * i;
-      let x = r * d.cos(a);
-      let y = r * d.sin(a);
+      let x = r * c.cos(a);
+      let y = r * c.sin(a);
       circleObj.push({
-        x: x,
-        y: y
+        x: x + centerX,
+        y: y + centerY
       })
 
     }
-    noiseoff += 0.05;
+  
   }
 
-  d.updateCircle = function () {
+  c.updateCircle = function (){
     for (let i=0; i<numPts+1; i++){
       let a = angleInc * i;
-      let offset = 10*d.noise(i*.5, noiseoff);
+      let offset = 10*c.noise(i*.5, noiseoff);
       let rOff = r + offset;
-      let x = rOff * d.cos(a);
-      let y = rOff * d.sin(a);
-      circleObj[i].x = x;
-      circleObj[i].y = y;
+      let x = rOff * c.cos(a);
+      let y = rOff * c.sin(a);
+      circleObj[i].x = x + centerX;
+      circleObj[i].y = y + centerY;
     }
-    noiseoff += 0.05;
-  }
+  };
+
+  var opacitySteps = 30;
+  var opacity = 1;
+  var opacityDir = -1;
+  var currFrame;
+
+  c.draw = function () {
+    c.background('#121213');
+    c.strokeWeight(2)
+    c.noFill();
+
+    if (stateElusive){
+
+
+      currFrame = c.frameCount % opacitySteps;
+      if (currFrame == 0 && c.frameCount > 0){
+        opacityDir = opacityDir*-1;
+      } 
+      opacity = opacityDir*currFrame/opacitySteps;
+      //c.fill(40, 80+opacity*150);
+      c.stroke(255, 80+opacity*150);
+    }
+    else {
+      c.stroke(255, 180);
+    }
+
+    if (stateExp){
+      if (r < 200){
+        r = r*1.01;
+      } else {
+        r = 40;
+      }
+    }
+
+    if (stateAmor){
+      noiseoff += 0.08;
+    }
+
+    c.updateCircle();
+
  
-
-  d.draw = function () {
-    d.background(20);
-  
-    d.fill(50);
-    d.stroke(255)
-    d.strokeWeight(1);
-    d.translate(containerDim.width/2, containerDim.height/2);
-
-    if (amorHover){
-      d.updateCircle();
-    }
     
-  
-    d.beginShape();
+    
+   
+     
+    c.beginShape();
     for (let i = 0 ; i < circleObj.length; i++){
       var el = circleObj[i];
      
-      d.vertex(el.x, el.y);
+      c.vertex(el.x, el.y);
     }
-    d.endShape();
+    c.endShape();
     
-    
-    // for (let i=0; i<numPts+1; i++){
-    //   let a = angleInc * i;
-    //   if (amorHover){
-    //     offset = 10*d.noise(i*.5, noiseoff);
-    //   } 
-    //   rOff = r + offset;
 
-    //   x = rOff * d.cos(a);
-    //   y = rOff * d.sin(a);
-
-    //   if (i==10){
-    //     console.log(x)
-    //   }
-    //   d.vertex(x, y);
-    // }
-    // d.endShape();
-
-    // noiseoff += 0.05;
-   
-    // stuff to draw
   }
 }
 
 
-
-var divElusive = document.querySelector('#body-elusive');
-new p5(canvasElusive, divElusive);
-
-var divExpansive = document.querySelector('#canvas-expansive');
-new p5(canvasExpansive, divExpansive)
-
-var divAmor = document.querySelector('#canvas-amorphous');
-new p5(canvasAmor, divAmor);
+var divAll = document.querySelector('#vis-holder');
+new p5(canvasAll, divAll);
 
 
-
-
-// var canvasExp = document.querySelector('#canvas-expansive');
-// new p5(canvasAmor, amor)
-
-
-// function setup() {
-//     createCanvas(700, 700)   
-//     background(150)
-// }
-
-// function draw() {
-
-// }
-
-// function keyPressed() {
-//     if (key == "a") {
-//       save(frameCount + ".png");
-//     }
-// }
