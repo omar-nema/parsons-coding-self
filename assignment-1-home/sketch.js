@@ -105,8 +105,11 @@ function canvasAll(c) {
       //c.fill(40, 80+opacity*150);
       c.stroke(255, 80+opacity*150);
     }
-    else {
+    else  {
       c.stroke(255, 180);
+    }
+    if (!stateAmor && !stateElusive && !stateExp){
+      c.stroke(255, 0);
     }
 
     if (stateExp){
@@ -122,12 +125,6 @@ function canvasAll(c) {
     }
 
     c.updateCircle();
-
- 
-    
-    
-   
-     
     c.beginShape();
     for (let i = 0 ; i < circleObj.length; i++){
       var el = circleObj[i];
@@ -135,7 +132,6 @@ function canvasAll(c) {
       c.vertex(el.x, el.y);
     }
     c.endShape();
-    
 
   }
 }
