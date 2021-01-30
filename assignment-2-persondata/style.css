@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
+
+
+body {
+    background: #2D2D31;
+    font-family: 'IBM Plex Mono';
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+.header-row {
+    background: #0a0a0a;
+    width: 100%;
+    height: 50px;
+
+}
+.header-small {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    width: 90%;
+    height: 100%;
+    max-width: 1100px;
+    margin: auto;
+    font-size: 16px;
+
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 50px 0;
+    display: flex;
+    justify-content: space-between
+}
+.pane {
+    flex-basis: 46%;
+}
+.pane.right {
+    background: black;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+
+
+
+
+.sel-group {
+    margin-bottom: 50px;
+}
+.label {
+    margin-bottom: 20px;
+    color: #D6D6D6;
+}
+.subtitle {
+    color: #D6D6D6;
+    font-weight: 400;
+}
+
+.label-big {
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: underline;
+    text-decoration-color: gray;
+    /* border-bottom: 1px solid gray; */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.chip {
+    display: inline-block;
+    border-radius: 30px;
+    border: 1px solid #D6D6D6;
+    color: #D6D6D6;
+    padding: 5px 13px;
+    transition: all .1s linear;
+    font-size: 14px;
+}
+.chip:hover {
+    border-color: #EEA1E3;
+    color: #EEA1E3;
+}
+.chip.selected {
+    border-color: #EEA1E3;
+    color: #EEA1E3;
+    background: black;
+}
+
+.att-viewer {
+    background: #3d3d3d;
+    width: 100%;
+    height: 500px;
+    border: 1px solid black;
+    /* box-shadow: 0 1px 2px 1px rgb(0 0 0 / 41%); */
+    position: relative;
+}
+
+.blob-holder {
+    display: inline-block;
+    margin-right: 13px;
+}
+
+.blob-holder.selected .blob-label {
+    color: #EEA1E3;;
+}
+
+.blob-holder.selected .blob {
+    border-color: #EEA1E3 ;
+}
+.sel-text {
+    color: #EEA1E3 ;
+    text-decoration: underline;
+    text-decoration-color: gray;
+    text-decoration-style: dotted;
+}
+
+.blob {
+    background: #181818;
+    width: 135px;
+    height: 135px;
+    border: 1px solid black;
+    overflow: hidden;
+}
+.blob-label {
+    text-align: center;
+    font-size: 14px;
+    padding-top: 7px;
+    color: #D6D6D6;
+}
+
+
+
+.person-data {
+    font-size: 8px;
+    background: black;
+    opacity: .8;
+    width: auto;
+    height: auto;
+    position: absolute;
+    display: inline-block;
+    padding: 5px 10px;
+}

@@ -1,0 +1,45 @@
+{
+
+    appearance: {
+        hairColor: "black",
+        skinColor: "olive",
+        height: "5'9"
+        collage: ["air force ones", "cargo pants", "earring", "no tattoos"]
+    },
+    
+    demeanor: {
+        collage: ["lots of eye contact", "walks slow", "somewhat slouchy", "cannot sit still"]
+    },
+
+    demographics: {
+        name: "kareem metwall",
+        age:  '35',
+        relationshipStatus: "single"
+    },
+
+    career: {
+        trajectory: 
+    },
+
+    opinions: {
+
+    },
+
+    emotion: {
+
+    },
+
+    answersToQuestions: {
+
+    },
+
+
+    slices: {
+        mostRecentTexts: ["dude no i would never do that", "what are dogs even", "stop you're so weird"],
+    }
+    
+
+}
+
+//we have constant things
+// we have slices

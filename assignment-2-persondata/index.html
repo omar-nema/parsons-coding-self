@@ -1,0 +1,63 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>sketch</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+   
+    <div class="header-row">
+        <div class="header-small">
+            <div class="header-left">
+                <span>Person Viewer v1.2</span>
+                <span class="subtitle"> • Dynamic character viewer</span>
+            </div>
+        </div>
+
+    </div>
+    <div class="container">
+        <!-- <div>
+            Data collected in realtime from biometric thoughts
+        </div> -->
+        <div class="pane left">
+            <div class="label-big">Parameters</div>
+            <div class="sel-group">
+                <div class="label">Select Person Data</div>
+                <div class="blob-holder selected"><div class="blob" id="one"></div><div class="blob-label">Ahmed</div></div>
+                <div class="blob-holder"><div class="blob" id="two"></div><div class="blob-label">Noor</div></div>
+                <div class="blob-holder"><div class="blob" id="three"></div><div class="blob-label">Carlos</div></div>
+            </div>
+
+            <div class="sel-group">
+                <div class="label">Select Version</div>
+                <div>
+                    <div class="chip selected">Alone</div>
+                    <div class="chip">Family</div>
+                    <div class="chip">Friends</div>
+                    <div class="chip">Online</div>                                     
+                </div>
+            </div>
+
+            <div class="sel-group">
+                <div class="label">Select Day</div>
+                <div class="sel-text">
+                    <div>Feb 5, 2021</div>   
+                </div>
+            </div>
+
+        </div>
+        <div class="pane right">
+            <div class="label-big">Attribute & Thought Stream</div>
+            <div class="att-viewer">
+
+            </div>
+        </div>            
+    </div>
+
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.5.0/d3.min.js" integrity="sha512-0XfwGD1nxplHpehcSVI7lY+m/5L37PNHDt+DOc7aLFckwPXjnjeA1oeNbru7YeI4VLs9i+ADnnHEhP69C9CqTA==" crossorigin="anonymous"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js'></script>
+<script src='./sketch.js'></script>
+<script src='./personview.js'></script>
