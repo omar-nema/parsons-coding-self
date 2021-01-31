@@ -11,11 +11,9 @@ function canvasScatter(c){
     let imgNames = ['img1.jpg', 'img2.PNG', 'img3.jpg', 'img4.jpg', 'img5.PNG', 'img6.JPG']
     let imgs = [];
     c.preload = function (){
-        personData = c.loadTable('./personData.csv', 'csv', 'header');
+        personData = c.loadTable('./persondata.csv', 'csv', 'header');
         f = c.loadFont('./ibmmono.ttf');
-
-
-        
+  
     }
 
     c.setup = function () {
@@ -41,7 +39,7 @@ function canvasScatter(c){
                 xDir: c.round(c.random(0, 1)),
                 yDir: c.round(c.random(0, 1)),
                 vel: c.random(0.2, .4),
-                rotate: c.random(-5, 5),
+                rotate: c.random(-.5, 0.5),
                 shear: 0
             })
         })
@@ -55,8 +53,8 @@ function canvasScatter(c){
                 xDir: c.round(c.random(0, 1)),
                 yDir: c.round(c.random(0, 1)),
                 vel: c.random(0.2, .4),
-                rotate: c.random(-5, 5),
-                shear: c.random(-1, 1)
+                rotate: c.random(-2, 2),
+                shear: c.random(-.5, .5)
             })
         });
 
