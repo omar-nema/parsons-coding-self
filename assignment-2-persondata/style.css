@@ -24,6 +24,7 @@ body {
     max-width: 1100px;
     margin: auto;
     font-size: 16px;
+    font-weight: 600;
 
 }
 
@@ -42,6 +43,8 @@ body {
     background: black;
     padding-left: 20px;
     padding-top: 20px;
+    border: 1px solid #626262
+    overflow: hidden;
 }
 
 
@@ -52,8 +55,10 @@ body {
     margin-bottom: 50px;
 }
 .label {
-    margin-bottom: 20px;
-    color: #D6D6D6;
+    margin-bottom: 15px;
+    color: #bdbdbd;
+    font-size: 14px;
+    font-weight: 500;
 }
 .subtitle {
     color: #D6D6D6;
@@ -79,10 +84,10 @@ body {
     transition: all .1s linear;
     font-size: 14px;
 }
-.chip:hover {
+/* .chip:hover {
     border-color: #EEA1E3;
     color: #EEA1E3;
-}
+} */
 .chip.selected {
     border-color: #EEA1E3;
     color: #EEA1E3;
@@ -93,7 +98,7 @@ body {
     background: #3d3d3d;
     width: 100%;
     height: 500px;
-    border: 1px solid black;
+
     /* box-shadow: 0 1px 2px 1px rgb(0 0 0 / 41%); */
     position: relative;
 }
@@ -112,9 +117,11 @@ body {
 }
 .sel-text {
     color: #EEA1E3 ;
-    text-decoration: underline;
-    text-decoration-color: gray;
-    text-decoration-style: dotted;
+    DISPLAY: inline-block;
+    background: black;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: 1px solid #EEA1E3;
 }
 
 .blob {

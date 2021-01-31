@@ -6,25 +6,60 @@ new p5(canvasScatter, divScatter);
 function canvasScatter(c){
 
     let personData;
-    let textObj = [];
+    let collageObj = [];
     let f;
+    let imgNames = ['img1.jpg', 'img2.PNG', 'img3.jpg', 'img4.jpg', 'img5.PNG', 'img6.JPG']
+    let imgs = [];
     c.preload = function (){
         personData = c.loadTable('./personData.csv', 'csv', 'header');
         f = c.loadFont('./ibmmono.ttf');
+
+
+        
     }
 
     c.setup = function () {
         cnv = c.createCanvas(scatterDim.width,scatterDim.height);
+
+        let sizeMaxImg = c.width/3;
+        c.angleMode(c.DEGREES);
+
+        imgNames.forEach(d=> {
+            var imgDir = './imgs/' + d; 
+            var img = c.loadImage(imgDir);
+            var w = img.width;
+            var h = img.height;
+            var ratio = c.max(img.width/sizeMaxImg, img.height/sizeMaxImg);
+            // img.resize(img.width/ratio, img.height/ratio);
+            collageObj.push({
+                type: 'image',
+                image: img,
+                x: c.random(-c.width, 2*c.width),
+                y: c.random(-c.height, 2*c.height),
+                w: img.width/ratio,
+                h: img.height/ratio,
+                xDir: c.round(c.random(0, 1)),
+                yDir: c.round(c.random(0, 1)),
+                vel: c.random(0.2, .4),
+                rotate: c.random(-5, 5),
+                shear: 0
+            })
+        })
+
         personData.rows.forEach(d=>{
-            textObj.push({
+            collageObj.push({
+                type: 'text',
                 obj: d.obj,
                 x: c.random(-c.width, 2*c.width),
                 y: c.random(-c.height, 2*c.height),
                 xDir: c.round(c.random(0, 1)),
                 yDir: c.round(c.random(0, 1)),
-                vel: c.random(0.2, .4)
+                vel: c.random(0.2, .4),
+                rotate: c.random(-5, 5),
+                shear: c.random(-1, 1)
             })
         });
+
 
         c.drawingContext.shadowOffsetX = 5;
         c.drawingContext.shadowOffsetY = -5;
@@ -37,36 +72,29 @@ function canvasScatter(c){
       }
 
       c.draw = function () {
-        c.background(0);
-      
-
-
+        c.background(0);  
         var maxTextWidth = c.width/2;
-       
-        textObj.forEach(d=>{
 
-            let bbox = f.textBounds(d.obj.value, d.x, d.y);
 
-       
-            if (d.obj.category == 'external'){
-                c.stroke('red')
+        collageObj.forEach(d=>{
 
-            } else if (d.obj.category == 'internal'){
-                c.stroke('blue')
-            } 
-            
-   
-            
-            var textWid = c.textWidth(d.obj.value);
-            var numLines = c.ceil(textWid / maxTextWidth);
-     
-            //c.rect(bbox.x, bbox.y, c.min(c.textWidth(d.obj.value), maxTextWidth), c.textAscent() * numLines );
+            c.rotate(d.rotate);
+            c.shearX(d.shear);
 
-            c.fill(180, 240);
-            c.text(d.obj.value, d.x, d.y, maxTextWidth);
+            if (d.type == 'text'){
+                if (d.obj.category == 'external'){
+                    // c.stroke('#c2cd0c')
+                    c.stroke(180)
+                } else if (d.obj.category == 'internal'){
+                    c.stroke('blue');
+                } 
+                c.fill(255, 240);
+                c.text(d.obj.value, d.x, d.y, maxTextWidth);
+            } else if (d.type == 'image'){
+                c.image(d.image, d.x, d.y, d.w, d.h);
+            }
 
-           
-            
+
             if (d.x > c.width){
                 d.xDir = 0;
             } else if (d.x < 0){

@@ -23,17 +23,18 @@ function canvasOne(c){
       }
 
     c.draw = function () {
-        c.noLoop();
-
-        c.rotateX(c.PI/2)
+     
+        c.rotateX(c.PI/2.5)
         c.translate(0,0, c.width*.4);
         c.background(0);
+
+        c.noLoop();
       
         c.noFill();
         col = c.color('#F587EA')
-        col.setAlpha(50);
+        col.setAlpha(120);
         c.stroke(col)
-        c.strokeWeight(1.5);
+        c.strokeWeight(1);
     
         var numPts = 30;
         var rMax = c.width/3;
@@ -50,7 +51,7 @@ function canvasOne(c){
           var h = (hMax/numCircles)*j/angleZ;
       
           for (var i=0; i<numPts; i++){
-            var offset = c.map(c.noise(j, i, c.frameCount/400), 0, 1, -10, 10);
+            var offset = c.map(c.noise(j, i, c.frameCount/300), 0, 1, -10, 10);
             r = r + offset;
             var aInner = angleInner*i;
             var x = r * c.cos(aInner);
