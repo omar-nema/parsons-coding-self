@@ -8,7 +8,7 @@ function canvasScatter(c){
     let personData;
     let collageObj = [];
     let f;
-    let imgNames = ['img1.jpg', 'img2.PNG', 'img3.jpg', 'img4.jpg', 'img5.PNG', 'img6.JPG']
+    let imgNames = ['img1.jpg', 'img2.PNG', 'img3.jpg', 'img4.jpg', 'img5.PNG', 'img6.JPG', 'img7.JPG', 'img8.JPG', 'img9.JPG', 'img10.JPG', 'img11.JPG', 'img12.JPG']
     let imgs = [];
     c.preload = function (){
         personData = c.loadTable('./persondata.csv', 'csv', 'header');
@@ -25,10 +25,11 @@ function canvasScatter(c){
         imgNames.forEach(d=> {
             var imgDir = './imgs/' + d; 
             var img = c.loadImage(imgDir);
+            img.resize(300, 0);
             var w = img.width;
             var h = img.height;
-            var ratio = c.max(img.width/sizeMaxImg, img.height/sizeMaxImg);
-            // img.resize(img.width/ratio, img.height/ratio);
+            var ratio = c.min(img.width/sizeMaxImg, img.height/sizeMaxImg);
+            
             collageObj.push({
                 type: 'image',
                 image: img,
@@ -80,12 +81,14 @@ function canvasScatter(c){
             c.shearX(d.shear);
 
             if (d.type == 'text'){
-                if (d.obj.category == 'external'){
-                    // c.stroke('#c2cd0c')
-                    c.stroke(180)
-                } else if (d.obj.category == 'internal'){
-                    c.stroke('blue');
-                } 
+                c.stroke(180);
+
+                // if (d.obj.category == 'external'){
+                //     // c.stroke('#c2cd0c')
+                   
+                // } else if (d.obj.category == 'internal'){
+                //     c.stroke('blue');
+                // } 
                 c.fill(255, 240);
                 c.text(d.obj.value, d.x, d.y, maxTextWidth);
             } else if (d.type == 'image'){
@@ -93,14 +96,14 @@ function canvasScatter(c){
             }
 
 
-            if (d.x > c.width){
+            if (d.x > 1.5*c.width){
                 d.xDir = 0;
-            } else if (d.x < 0){
+            } else if (d.x < -c.width/2){
                 d.xDir = 1;           
             }
-            if (d.y > c.height){
+            if (d.y > c.height*1.5){
                 d.yDir = 0;
-            }else if (d.y < 0){
+            }else if (d.y < -c.height/2){
                 d.yDir = 1;           
             }
       
