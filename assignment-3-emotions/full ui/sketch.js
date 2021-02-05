@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function(){
     function coreBtnClick(d){
         var dataVal = this.getAttribute('data');
         emotionCore = dataVal;
+
         for (el of selcore){
             el.classList.remove('active');
         }
@@ -29,8 +30,17 @@ document.addEventListener("DOMContentLoaded", function(){
 
     function compBtnClick(d){
         var dataVal = this.getAttribute('data');
-        emotionComp.push(dataVal);
-        this.classList.add('active');
+
+        if (this.classList.contains('active')){
+            var ind = emotionComp.indexOf(dataVal);
+            emotionComp.splice(ind, 1);
+            this.classList.remove('active');
+        } else {
+            emotionComp.push(dataVal);
+            this.classList.add('active');
+        }
+
+   
     }
 
 
@@ -50,17 +60,10 @@ document.addEventListener("DOMContentLoaded", function(){
             c.prepJoy();
             c.prepAnxiety();
             c.prepAnger();
-          }
-
-      
-   
-        var anxietyArr = [];
-        c.prepAnxiety = function(){
-            for (var i = 0 ; i < 100; i++){
-                anxietyPt = {x: c.random(-width, width*2), y: c.random(-ht, ht*2)};
-                anxietyArr.push(anxietyPt)
-            }
+            c.prepSadness();
         }
+
+   
         var joyArr = [];
         c.prepJoy = function(){      
             var numPts = 7;
@@ -78,60 +81,23 @@ document.addEventListener("DOMContentLoaded", function(){
        
         }
         c.drawJoy = function(){
-
-            var numLayers = 5;
+            var numLayers = 4;
             var minB = 30;
             var maxB = 100; 
             var minSizeRatio = .75;
             for (let i = 0; i<numLayers; i++){
+                c.push();
                 var currB = minB + i*(maxB - minB)/numLayers;
                 var sizeRatio = minSizeRatio +(numLayers-i)*(1-minSizeRatio)/numLayers;
                 c.fill(0,0,currB);
                 c.noStroke();
-                c.push()
                 c.beginShape()
                 joyArr.forEach(d=> {
                     c.curveVertex(d.x*sizeRatio, d.y*sizeRatio);
                 })
-                c.endShape(c.CLOSE);
+                c.endShape();
                 c.pop()
             }     
-        }
-        c.drawFear = function(){
-            alphaGlobal = .2;
-            scaleFactor = .6;
-            c.push();
-            c.noStroke();
-            c.fill(0,0, 0, .5);
-            c.rect(width/2,ht/2, width*scaleFactorLonely, ht*scaleFactorLonely);
-            c.pop();
-            //should the background be repeating
-        }
-
-        c.drawPride = function(){
-            c.push();
-            c.noFill();
-            c.stroke(0,0, 0, 1);
-            c.strokeWeight(14*scaleFactorLonely);
-            c.rect(width/2,ht/2, width*scaleFactorLonely, ht*scaleFactorLonely);
-            c.pop();
-        };
-
-        c.drawAnxiety = function() {
-            c.push();
-            c.noFill();
-            c.stroke(0,0, 0, .2);
-            c.strokeWeight(1);
-            c.beginShape();
-            anxietyArr.forEach(d=> {
-                c.vertex(d.x, d.y);
-            })
-            c.endShape();
-            c.pop();
-        }
-
-        c.drawLoneliness = function(){
-            scaleFactorLonely = 0.2;
         }
 
         var angryArr = [];
@@ -175,6 +141,102 @@ document.addEventListener("DOMContentLoaded", function(){
             }
     
         }
+
+        var sadArr = [];
+        var sadWidth = width/3;
+        c.prepSadness = function(){
+            var numPts = 50;
+            var angleInc = 360/numPts;
+            var r = sadWidth;
+            var ctrx = width/2;
+            var ctry = ht/2;
+            var rdiff = r/10;
+            for (var i=0; i< numPts+1; i++){
+                let a = angleInc * i;
+                let x = r * c.cos(a) + c.random(-rdiff, rdiff);
+                let y = r * c.sin(a) + c.random(-rdiff, rdiff);
+                sadArr.push({x: ctrx+x, y: ctry+y});
+            }
+        };
+        c.drawSadness = function(){
+            var numLayers = 3;
+            var minB = 40;
+            var maxB = 60; 
+       
+            var minSizeRatio = .7;
+            var ratioInc = (1-minSizeRatio)/numLayers;
+
+            for (let i = 0; i<numLayers; i++){
+                c.push();
+                var currB = minB + i*(maxB - minB)/numLayers;
+  
+                var widthRatio = 1 - ratioInc*i;
+
+
+                var transAmt = (blobWidth - widthRatio*sadWidth);
+    
+                c.fill(0,0,currB, .15);
+                c.noStroke();
+                var sadTrans = (sadWidth - widthRatio*sadWidth);
+                c.translate(sadTrans, sadTrans*2)
+                c.beginShape()
+                sadArr.forEach(d=> {
+                    c.curveVertex(d.x*widthRatio, d.y*widthRatio);
+                })
+                c.endShape();
+                c.pop()
+
+               
+            }    
+        };
+
+
+        //completementary drawing
+        var anxietyArr = [];
+        c.prepAnxiety = function(){
+            for (var i = 0 ; i < 5000; i++){
+                anxietyPt = {x: c.random(-width, width*2), y: c.random(-ht, ht*2)};
+                anxietyArr.push(anxietyPt)
+            }
+        }
+        c.drawAnxiety = function() {
+            c.push();
+            c.noFill();
+            c.stroke(0,0, 0, .2);
+            c.strokeWeight(.2);
+            c.beginShape();
+            anxietyArr.forEach(d=> {
+                c.vertex(d.x, d.y);
+            })
+            c.endShape();
+            c.pop();
+        }
+        c.drawLoneliness = function(){
+            scaleFactorLonely = 0.2;
+        }
+        c.drawFear = function(){
+            alphaGlobal = .2;
+            scaleFactor = .6;
+            c.push();
+            c.noStroke();
+            c.fill(0,0, 0, .5);
+            c.rect(width/2,ht/2, width*scaleFactorLonely, ht*scaleFactorLonely);
+            c.pop();
+            //should the background be repeating
+        }
+        c.drawPride = function(){
+            c.push();
+            c.noFill();
+            c.stroke(0,0, 0, 1);
+            c.strokeWeight(14*scaleFactorLonely);
+            c.rect(width/2,ht/2, width*scaleFactorLonely, ht*scaleFactorLonely);
+            c.pop();
+        };
+
+     
+    
+
+
      
 
         c.draw = function (){
@@ -189,8 +251,6 @@ document.addEventListener("DOMContentLoaded", function(){
             else if (emotionCore == 'anger'){
                 c.drawAnger();
             }
-            
-        
   
             if (emotionComp.includes('loneliness')){
                 c.drawLoneliness();
