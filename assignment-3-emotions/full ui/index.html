@@ -1,0 +1,45 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>sketch</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+    <div id="container">
+        <div class="header-row">
+            Shape of Emotion: Proof of Concept
+        </div>
+        <div class="panes">
+            <div class="pane left">
+                <div class="header-small">Selection</div>
+                <div class="sel-group">
+                    <div class="sel-instruction">Choose one <strong>starting emotion</strong></div>
+                    <div class="emotion-btns core">
+                        <div class="emotion-btn" data="joy">Joy</div>
+                        <div class="emotion-btn" data="sadness">Sadness</div>
+                        <div class="emotion-btn" data="anger">Anger</div>
+                    </div>
+                </div>
+                <div class="sel-group">
+                    <div class="sel-instruction">Choose up to 3 <strong>complementary</strong> emotions</div>
+                    <div class="emotion-btns comp">
+                        <div class="emotion-btn" data="anxiety">Anxiety</div>
+                        <div class="emotion-btn" data="fear">Fear</div>
+                        <div class="emotion-btn" data="pride">Pride</div>
+                        <div class="emotion-btn" data="loneliness">Loneliness</div>
+                    </div>
+                </div>
+            </div>
+            <div class="pane right">
+                <div class="header-small">Visualization</div>
+                <div class="canvas-holder"></div>
+            </div>
+        </div>
+   
+    </div>
+
+</body>
+</html>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js'></script>
+<script src='./sketch.js'></script>

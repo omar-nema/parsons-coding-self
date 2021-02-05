@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Work Sans', sans-serif;
+}
+body {
+    background: #F9F9F9;
+}
+#container {
+    max-width: 1000px;
+    margin:auto;
+    width: 90%;
+    padding-top: 30px;
+}
+.header-row {
+    font-size: 26px;
+    font-weight: 600;
+    padding-bottom: 30px;
+    border-bottom: 3px solid black;
+    margin-bottom: 30px;
+}
+.panes {
+    display: flex;
+}
+.header-small {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+.pane {
+    flex-basis: 50%;
+}
+.sel-instruction {
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+strong {
+    font-weight: 500;
+}
+.emotion-btns {
+    display: inline-flex;
+    flex-wrap: wrap;
+ 
+}
+.emotion-btn {
+    border: 1px solid #DBDBDB;
+    width: 100px;
+    height: 35px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    transition: all .15s linear;
+    cursor: pointer;
+}
+.emotion-btn:hover {
+    border-color: #5554EE;
+}
+.emotion-btn.active {
+    border-color: #5554EE;
+    color:  #5554EE;
+    background: white;
+}
+
+.sel-group {
+    margin-bottom: 15px;
+    width: 80%;
+}
+
+.canvas-holder {
+    border: 1px solid #d4d3d3;
+    height: 400px;
+    width: 400px;
+    overflow: hidden;
+}
