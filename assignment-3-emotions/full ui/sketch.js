@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function(){
             c.prepAnger();
             c.prepSadness();
             c.prepJoy();
-            c.prepShame();
+            c.prepSpiral();
             c.prepConfusion();
         }
 
@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", function(){
             for (let y = 0; y < rows; y ++ ){
                 var xoff = 0;
                 yoff += inc;
-                for (let x = 0; x < cols; x ++ ){        
+                for (let x = 0; x < cols+1; x ++ ){        
                     c.push()
   
                     //col.setAlpha(c.random(1));
@@ -308,13 +308,14 @@ document.addEventListener("DOMContentLoaded", function(){
                     var angle = c.noise(xoff, yoff, zoff) * c.TWO_PI;
                     var v = p5.Vector.fromAngle(angle);
                     var joyObj = {
-                        strokeWt: 10,
+                        strokeWt: 12,
                         angle: angle,
                         translateX: x*scl,
                         translateY: y*scl,
                         rotate: v.heading(),
                         lineY: scl, 
-                        color: c.color(c.random(40, 300), 85, 90, c.random(.2, 1))
+                        color: c.color(c.random(20, 320), c.random(0, 100), 90, c.random(.1, .8))
+                        //color: c.color(c.random(40, 290), 85, 90, c.random(.1, .8))
                     }
                     joyArrReal.push(joyObj);
                     c.pop()
@@ -343,12 +344,85 @@ document.addEventListener("DOMContentLoaded", function(){
         }
 
      
-        c.prepShame = function(){
-
+        var spiralArr = [];
+        c.prepSpiral = function(){
+            var numPts = 500;
+            var angleInc = 360/numPts;
+            var r = width/20;
+            var ctrx = width/2;
+            var ctry = ht/2;
+            var rdiff = r/10;
+            var len = 2;
+            var x, y;
+            for (var i=0; i< numPts+1; i++){
+                let a = angleInc * i;
+                x = r * c.cos(a) + c.random(-rdiff, rdiff);
+                y = r * c.sin(a) + c.random(-rdiff, rdiff);
+                r += 1.5;
+                spiralArr.push({x: ctrx+x, y: ctry+y});
+            }
         }
-        c.drawShame = function(){
+        c.drawSpiral = function(){
+            c.push();
+            c.shearX(c.PI/10)
+           
+            c.stroke(50, 50);
 
-        }
+            if (emotionComp.includes('anxiety')){
+                spiralArr.forEach( (z,i)=>{
+                    z.x += c.map(c.noise(i, noiseOff), 0, 1, -.5, .5);
+                    z.y += c.map(c.noise(i, noiseOff), 0, 1, -.5, .5);
+                });
+            }
+         
+            c.strokeWeight(.6);
+            c.beginShape();
+            spiralArr.forEach((z,i)=>{
+                c.vertex(z.x, z.y)
+            });
+            c.endShape();
+            c.pop();
+
+            c.push();
+            c.shearX(-c.PI/7)
+            c.noFill();
+
+            c.stroke(50, 20)
+            c.strokeWeight(0.2);
+            c.beginShape();
+            spiralArr.forEach((z,i)=>{
+                c.vertex(z.x, z.y)
+            });
+            c.endShape();
+            c.pop();
+
+            c.push();
+            c.shearX(-c.PI/3)
+            c.noFill();
+            c.strokeWeight(0.2);
+
+            c.stroke(50, 10)
+            c.beginShape();
+            spiralArr.forEach((z,i)=>{
+                c.curveVertex(z.x, z.y)
+            });
+            c.endShape();
+            c.pop();
+
+            c.push();
+            c.shearX(-c.PI/2)
+            c.noFill();
+            c.strokeWeight(0.6);
+
+            c.stroke(50, 10)
+            c.beginShape();
+            spiralArr.forEach((z,i)=>{
+                //c.circle(z.x, z.y, 5, 5)
+                c.vertex(z.x, z.y)
+            });
+            c.endShape();
+            c.pop();
+        }   
 
         var confuseArr = [];
         let imgW = 200;
@@ -386,6 +460,10 @@ document.addEventListener("DOMContentLoaded", function(){
          
             c.background(240);
 
+            if (emotionComp.includes('loneliness')){
+                c.scale(0.33);
+                c.translate(width, ht)
+            }   
             if (emotionCore == 'focus'){
                 c.drawFocus();
             }  else if (emotionCore == 'sadness'){
@@ -398,12 +476,9 @@ document.addEventListener("DOMContentLoaded", function(){
                 c.drawJoy();
             }     
             else if (emotionCore == 'shame'){
-                c.drawShame();
+                c.drawSpiral();
             }         
-  
-            if (emotionComp.includes('loneliness')){
-                c.drawLoneliness();
-            }   
+
             if (emotionComp.includes('anxiety')){
                 c.drawAnxiety();
             }     
@@ -423,18 +498,3 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
   });
-
-
-// function setup() {
-//     createCanvas(700, 700)   
-// }
-
-// function draw() {
-
-// }
-
-// function keyPressed() {
-//     if (key == "a") {
-//       save(frameCount + ".png");
-//     }
-// }
