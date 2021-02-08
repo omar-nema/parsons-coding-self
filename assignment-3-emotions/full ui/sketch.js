@@ -51,27 +51,31 @@ document.addEventListener("DOMContentLoaded", function(){
     function drawCanvas(c){
         var width = containerDim.width - 2;
         var ht = containerDim.height - 2;
+        var noiseOff = 0;
 
         c.setup = function () {
             cnv = c.createCanvas(width, ht);
             c.background(250);
             c.colorMode(c.HSB);
             c.rectMode(c.CENTER);
-            c.prepJoy();
+            c.prepFocus();
             c.prepAnxiety();
             c.prepAnger();
             c.prepSadness();
         }
 
+      
    
         var joyArr = [];
-        c.prepJoy = function(){      
+        
+        var joyWidth = width/3;
+        c.prepFocus = function(){      
             var numPts = 7;
             var angleInc = 360/numPts;
-            var r = width/3;
+            var r = joyWidth;
             var ctrx = width/2;
             var ctry = ht/2;
-            var rdiff = r/10;
+            var rdiff = r/20;
             for (var i=0; i< numPts+1; i++){
                 let a = angleInc * i;
                 let x = r * c.cos(a) + c.random(-rdiff, rdiff);
@@ -80,28 +84,65 @@ document.addEventListener("DOMContentLoaded", function(){
             }
        
         }
-        c.drawJoy = function(){
-            var numLayers = 4;
-            var minB = 30;
+
+        var colAdd = 0;
+        c.drawFocus = function(){
+            var numLayers = 10;
+            var minB = 50;
             var maxB = 100; 
-            var minSizeRatio = .75;
+            var minSizeRatio = .7 ;
+        
+            c.push();
+   
+            c.stroke(50, 50);
+            c.noStroke();
+            c.fill(300,50,minB-3, 1);
+     
+            c.shearX(3)
+            c.rect(width/2, ht/2, width/1.3, ht/1.3)
+            c.pop();
+
+            c.background(0,0,minB-2, 1);
+
+
             for (let i = 0; i<numLayers; i++){
                 c.push();
                 var currB = minB + i*(maxB - minB)/numLayers;
                 var sizeRatio = minSizeRatio +(numLayers-i)*(1-minSizeRatio)/numLayers;
-                c.fill(0,0,currB);
+                c.fill(0,0,currB, 1);
                 c.noStroke();
+                c.shearX(3)
+
                 c.beginShape()
-                joyArr.forEach(d=> {
+                joyArr.forEach( (d, z) => {
+
+
+                    var noisey = 0;
+                    var noisex = 0;
+                        if (emotionComp.includes('anxiety')){
+                            var noisex = c.map(c.noise(noiseOff, z), 0, 1, -.02, .02);
+                            var noisey = c.map(c.noise(noiseOff, z+5000), 0, 1, -.2, .2);
+                        }
+    
+            
+                    d.x += noisex;
+                    d.y += noisey;
+             
                     c.curveVertex(d.x*sizeRatio, d.y*sizeRatio);
+
+                
                 })
                 c.endShape();
                 c.pop()
+
+ 
             }     
+
+            
         }
 
         var angryArr = [];
-        var blobWidth = width/2.5;
+        var blobWidth = width/2.7;
         c.prepAnger = function(){
             var numPts = 30;
             var angleInc = 360/numPts;
@@ -133,7 +174,19 @@ document.addEventListener("DOMContentLoaded", function(){
                 var transAmt = (blobWidth - widthRatio*blobWidth);
                 c.translate(transAmt, transAmt*2)
                 c.beginShape();
-                angryArr.forEach(d=> {
+                angryArr.forEach((d, z)=> {
+                    if (emotionComp.includes('anxiety')){
+                        if (emotionComp.includes('fear')){
+                            widthRatio += c.map(c.noise(noiseOff, z), 0, 1, -.02, .02);
+                        } else if (emotionComp.includes('pride')){
+                            widthRatio += c.map(c.noise(noiseOff, z), 0, 1, -.13, .13);
+                        }
+                        else {
+                            widthRatio += c.map(c.noise(noiseOff, z), 0, 1, -.07, .07);
+                        }
+                        
+                    }
+
                     c.vertex(d.x*widthRatio, d.y*widthRatio);
                 })
                 c.endShape(c.CLOSE);
@@ -169,10 +222,11 @@ document.addEventListener("DOMContentLoaded", function(){
             for (let i = 0; i<numLayers; i++){
                 c.push();
                 var currB = minB + i*(maxB - minB)/numLayers;
-  
                 var widthRatio = 1 - ratioInc*i;
-
-
+                if (emotionComp.includes('anxiety')){
+                 
+                    widthRatio += c.map(c.noise(noiseOff), 0, 1, -.1, .1);
+                }
                 var transAmt = (blobWidth - widthRatio*sadWidth);
     
                 c.fill(0,0,currB, .15);
@@ -186,7 +240,6 @@ document.addEventListener("DOMContentLoaded", function(){
                 c.endShape();
                 c.pop()
 
-               
             }    
         };
 
@@ -203,9 +256,13 @@ document.addEventListener("DOMContentLoaded", function(){
             c.push();
             c.noFill();
             c.stroke(0,0, 0, .2);
-            c.strokeWeight(.2);
+            c.strokeWeight(.35);
             c.beginShape();
-            anxietyArr.forEach(d=> {
+            anxietyArr.forEach((d, z)=> {
+                var noisex = c.map(c.noise(noiseOff*2, z), 0, 1, -1, 1);
+                var noisey = c.map(c.noise(noiseOff*2, z+5000), 0, 1, -1, 1);
+                d.x += noisex;
+                d.y += noisey;
                 c.vertex(d.x, d.y);
             })
             c.endShape();
@@ -215,11 +272,12 @@ document.addEventListener("DOMContentLoaded", function(){
             scaleFactorLonely = 0.2;
         }
         c.drawFear = function(){
-            alphaGlobal = .2;
+            alphaGlobal = .15;
             scaleFactor = .6;
             c.push();
             c.noStroke();
-            c.fill(0,0, 0, .5);
+    
+            c.fill(0,0, 0, .65);
             c.rect(width/2,ht/2, width*scaleFactorLonely, ht*scaleFactorLonely);
             c.pop();
             //should the background be repeating
@@ -227,7 +285,7 @@ document.addEventListener("DOMContentLoaded", function(){
         c.drawPride = function(){
             c.push();
             c.noFill();
-            c.stroke(0,0, 0, 1);
+            c.stroke('red');
             c.strokeWeight(14*scaleFactorLonely);
             c.rect(width/2,ht/2, width*scaleFactorLonely, ht*scaleFactorLonely);
             c.pop();
@@ -243,8 +301,8 @@ document.addEventListener("DOMContentLoaded", function(){
          
             c.background(240);
 
-            if (emotionCore == 'joy'){
-                c.drawJoy();
+            if (emotionCore == 'focus'){
+                c.drawFocus();
             }  else if (emotionCore == 'sadness'){
                 c.drawSadness();
             }
@@ -264,7 +322,8 @@ document.addEventListener("DOMContentLoaded", function(){
             if (emotionComp.includes('pride')){
                 c.drawPride();
             }             
-         
+            noiseOff += 0.05;
+            
         }  
     }
 
