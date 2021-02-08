@@ -62,12 +62,13 @@ document.addEventListener("DOMContentLoaded", function(){
             c.prepAnxiety();
             c.prepAnger();
             c.prepSadness();
+            c.prepJoy();
+            c.prepShame();
+            c.prepConfusion();
         }
 
-      
-   
         var joyArr = [];
-        
+        var colAdd = 0;
         var joyWidth = width/3;
         c.prepFocus = function(){      
             var numPts = 7;
@@ -84,8 +85,6 @@ document.addEventListener("DOMContentLoaded", function(){
             }
        
         }
-
-        var colAdd = 0;
         c.drawFocus = function(){
             var numLayers = 10;
             var minB = 50;
@@ -115,16 +114,12 @@ document.addEventListener("DOMContentLoaded", function(){
 
                 c.beginShape()
                 joyArr.forEach( (d, z) => {
-
-
                     var noisey = 0;
-                    var noisex = 0;
-                        if (emotionComp.includes('anxiety')){
-                            var noisex = c.map(c.noise(noiseOff, z), 0, 1, -.02, .02);
-                            var noisey = c.map(c.noise(noiseOff, z+5000), 0, 1, -.2, .2);
-                        }
-    
-            
+                    var noisex = 0;    
+                    if (emotionComp.includes('anxiety') && !emotionComp.includes('fear')){
+                        var noisex = c.map(c.noise(noiseOff, z), 0, 1, -.02, .02);
+                        var noisey = c.map(c.noise(noiseOff, z+5000), 0, 1, -.2, .2);
+                    }                     
                     d.x += noisex;
                     d.y += noisey;
              
@@ -223,9 +218,11 @@ document.addEventListener("DOMContentLoaded", function(){
                 c.push();
                 var currB = minB + i*(maxB - minB)/numLayers;
                 var widthRatio = 1 - ratioInc*i;
-                if (emotionComp.includes('anxiety')){
-                 
+        
+                if (emotionComp.includes('anxiety') && !emotionComp.includes('fear')){
                     widthRatio += c.map(c.noise(noiseOff), 0, 1, -.1, .1);
+                } else if (emotionComp.includes('anxiety') && emotionComp.includes('fear')){
+                    widthRatio += c.map(c.noise(noiseOff), 0, 1, -.02, .02);
                 }
                 var transAmt = (blobWidth - widthRatio*sadWidth);
     
@@ -242,7 +239,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
             }    
         };
-
 
         //completementary drawing
         var anxietyArr = [];
@@ -291,11 +287,100 @@ document.addEventListener("DOMContentLoaded", function(){
             c.pop();
         };
 
+
+        var joyArrReal = [];
+        var zoff = 0;
+        var yoff = 0;
+        c.randomSeed(10);
+        var scl = 6;
+        var cols = c.floor(width / scl)
+        var rows = c.floor(ht / scl);
+        let inc = 0.1;
+        c.prepJoy = function(){
+            for (let y = 0; y < rows; y ++ ){
+                var xoff = 0;
+                yoff += inc;
+                for (let x = 0; x < cols; x ++ ){        
+                    c.push()
+  
+                    //col.setAlpha(c.random(1));
+                    var namt = c.map(c.noise(x, y), 0, 1, 0, 360);
+                    var angle = c.noise(xoff, yoff, zoff) * c.TWO_PI;
+                    var v = p5.Vector.fromAngle(angle);
+                    var joyObj = {
+                        strokeWt: 10,
+                        angle: angle,
+                        translateX: x*scl,
+                        translateY: y*scl,
+                        rotate: v.heading(),
+                        lineY: scl, 
+                        color: c.color(c.random(40, 300), 85, 90, c.random(.2, 1))
+                    }
+                    joyArrReal.push(joyObj);
+                    c.pop()
+                    xoff += inc;
+                }
+            }
+        }
+        c.drawJoy = function(){            
+            joyArrReal.forEach((d,z)=>{
+                c.push();
+                c.strokeWeight(d.strokeWt);
+                c.stroke(d.color);
+                c.translate(d.translateX, d.translateY)
+                c.rotate(d.rotate);
+                c.line(0, 0, d.lineY, 0);
+                c.pop();
+                if (emotionComp.includes('anxiety') && !emotionComp.includes('fear')){
+                    d.rotate += .15;
+                    // d.rotate += c.map(c.noise(z), 0, 1, - else.5, .5);
+                } else if (emotionComp.includes('anxiety') && emotionComp.includes('fear')){
+                    d.rotate += .07;
+                }
+            }); 
+
+        
+        }
+
      
+        c.prepShame = function(){
+
+        }
+        c.drawShame = function(){
+
+        }
+
+        var confuseArr = [];
+        let imgW = 200;
+        let imgH = 200;
+        let img = c.createImage(imgW, imgH);
+        let imgScale = c.min(width/imgW, ht/imgH);
+        c.prepConfusion = function(){
+            for (y=0; y<imgH; y++){
+                for (x=0;x<imgW; x++){
+                    let col = c.color(0, 0, c.random(70, 130), .5);
+                    confuseArr.push({
+                        col: col,
+                        x: x,
+                        y: y
+                    })
+                }
+            }
+        };
+        c.drawConfusion = function(){
+            confuseArr.forEach((d,i) => {
+                img.set(d.x, d.y, d.col); 
+            })
+
+            img.updatePixels();
+            c.noSmooth(); 
+            c.filter(c.BLUR)
+            c.image (img, 0,0, imgW*imgScale, imgH*imgScale);
+
+          
+        };
     
 
-
-     
 
         c.draw = function (){
          
@@ -309,6 +394,12 @@ document.addEventListener("DOMContentLoaded", function(){
             else if (emotionCore == 'anger'){
                 c.drawAnger();
             }
+            else if (emotionCore == 'joy'){
+                c.drawJoy();
+            }     
+            else if (emotionCore == 'shame'){
+                c.drawShame();
+            }         
   
             if (emotionComp.includes('loneliness')){
                 c.drawLoneliness();
@@ -319,9 +410,13 @@ document.addEventListener("DOMContentLoaded", function(){
             if (emotionComp.includes('fear')){
                 c.drawFear();
             } 
+            if (emotionComp.includes('confusion')){
+                c.drawConfusion();
+            }   
             if (emotionComp.includes('pride')){
                 c.drawPride();
-            }             
+            } 
+                              
             noiseOff += 0.05;
             
         }  
