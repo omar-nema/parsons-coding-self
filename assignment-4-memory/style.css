@@ -26,8 +26,10 @@ main {
   }
 
   h1, h1 span {
-    font-size: 34px;
+    font-size: 40px;
     font-weight: 300;
+    text-decoration: underline;
+    text-decoration-color: #aab094;
   } 
 
 #scrolly {
@@ -46,7 +48,7 @@ main {
   
 .card {
     height: 80vh;
-    font-size: 24px;
+    font-size: 30px;
     /* width: 30%; */
     margin-right: 20px;
     padding-bottom: 15px;
@@ -74,21 +76,19 @@ margin-bottom: 50vh;
 
 .vis-holder {
     position: fixed;
-    height: 100%;
     z-index: -1;
-    top: 0;
     overflow: visible;
     width: 60%;
     max-width: 600px;
     /* max-height: 400px; */
-    height: 70vh;
+    height: 60vh;
     margin: auto;
     right: 30%;
-    top: 100px;
+    top: 50%;
     /* opacity: 0; */
     /* border: 1px solid gray; */
     opacity: 0;
-    transform: translateX(50%);
+    transform: translateX(50%) translateY(-50%);
     transition: opacity .15s ease-in-out, right .3s ease-in-out, transform .3s ease-in-out;
 }
 .vis-holder.center {
@@ -127,12 +127,11 @@ margin-bottom: 50vh;
 
 }
 
-.link {
+.link, .node{
   opacity: 0;
+  transition: opacity .15s ease-in-out;
 }
-.node {
-  opacity: 0;
-}
+
 
 .link.show {
   opacity: 1;
@@ -140,14 +139,14 @@ margin-bottom: 50vh;
 .vis-label {
   position: absolute;
   transform: translate(50%, 50%);
-  background: #404040;
-  width: 200px;
+  background: #38383bbd;
+  width: 400px;
   padding: 7px 10px;
   top: 13%;
   right: 50%;
   opacity: 0;
   transition: opacity .15s ease-in-out;
-  text-align: center
+  text-align: left;
 }
 .vis-label.show {
   opacity: 1;

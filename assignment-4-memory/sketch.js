@@ -81,55 +81,34 @@ document.addEventListener("DOMContentLoaded", function(){
     var centerx = bbox.width/2;
     var centery = bbox.height/2;
 
-
-    // var nodeData = {
-    //     "nodes": [
-    //         {"id": "mem1", "group": 1}
-    //         ,{"id": "mem2", "group": 1}
-    //         ,{"id": "mem3", "group": 2}
-    //         ,{"id": "mem4", "group": 2}
-    //         ,{"id": "mem5", "group": 2}
-    //         ,{"id": "mem6", "group": 4}
-    //         ,{"id": "mem7", "group": 4}
-    //     ], 
-    //     "links": [
-    //         {"source": "mem1", "target": "mem2", "value": .3  },
-    //         {"source": "mem3", "target": "mem4", "value": .5  },
-    //         {"source": "mem1", "target": "mem5", "value": .1  },
-    //         {"source": "mem5", "target": "mem2", "value": .8  },
-    //         {"source": "mem6", "target": "mem7", "value": .8 },
-    //         // {"source": "mem2", "target": "mem1", "value": 5 },
-     
-    //     ]
-    // }
-
     var nodes = [];
     var links = [];
-    var numNodes = 500;
-    var numLinks = numNodes/2;
-    var numGrps = 15;
+    var numNodes = 60;
+    var numGrps = 10;
     for (var i=0; i<numNodes; i++){
-        var nodeId = Math.floor(Math.random()*numNodes);
+        var nodeId = i.toString();
         var groupId = Math.floor(Math.random()*numGrps);
         nodes.push({id: nodeId.toString(), group: groupId })
     }
-    for (var i=0; i<numLinks; i++){
-        var src = nodes[Math.floor(Math.random() * nodes.length)];
-        var target = nodes[Math.floor(Math.random() * nodes.length)];
-        links.push({source: src.id, target: target.id, value: Math.random()})
+
+    nodes.forEach(d=> {
+        var targetInd = Math.floor(Math.random()*nodes.length).toString();
+        var target = nodes.filter(o => o.id == targetInd)[0];
+        var groupId = Math.floor(Math.random()*numGrps);
+        links.push({source: d.id, target: target.id, value: 1, linkGroup: groupId})
+    })
+    //more links
+    for (var i=0; i<numNodes/3; i++){
+        var targetInd = Math.floor(Math.random()*nodes.length).toString();
+        var target = nodes.filter(o => o.id == targetInd)[0];
+        var srcId =  Math.floor(Math.random()*nodes.length).toString();
+        var groupId = Math.floor(Math.random()*numGrps);
+        links.push({source: srcId, target: target.id, value: 1, linkGroup: groupId})
     }
 
+ 
 
-    links.forEach(d=> {
-        var srcGrp = nodes.filter(o => o.id == d.source)[0].group;
-        var targetGrp = nodes.filter(o => o.id == d.target)[0].group;
-        if (srcGrp == 1 && targetGrp == 1){
-            d.linkGroup = 1;
-        } else if ([1, 2].includes(srcGrp) && [1, 2].includes(targetGrp)){
-            d.linkGroup = 2;
-        }
-        
-    })
+    //better way of connecting
 
     var simulation = d3.forceSimulation(nodes)
         .force('charge', d3.forceManyBody())
@@ -158,12 +137,14 @@ document.addEventListener("DOMContentLoaded", function(){
         '#e5fcc2'
       ];
 
+     var origR = 7; 
+
     var link = svg.append('g').attr('class', 'links')
         .selectAll('.link')
         .data(links)
         .join('line')
         .attr('stroke-width', .5) 
-        .attr('stroke', 'white')
+        .attr('stroke', 'rgba(255,255,255,.2)')
         .attr('class', d=>{return 'link ' + 'group-' + d.linkGroup})
         ;
 
@@ -171,16 +152,16 @@ document.addEventListener("DOMContentLoaded", function(){
         .selectAll('.node')
         .data(nodes)
         .join('circle')
-        .attr('r', 8)
+        .attr('r', origR)
         .attr('fill', d => {return cols[Math.floor(Math.random() * cols.length)]}  )
+        .attr('stroke', 'black')
         .attr('class', d=>{return 'node ' + 'group-' + d.group})
     ;
 
-  ;
-
     function removeFilter(){
-        svg.selectAll('.node').transition().attr('r', 8);
+        svg.selectAll('.node').transition().attr('r', origR);
         svg.select('.nodes').style('filter', 'none');
+        svg.select('.links').style('filter', 'none')
     }
 
     function highlightAll(){
@@ -190,31 +171,40 @@ document.addEventListener("DOMContentLoaded", function(){
         d3.select('#vis-plural').classed('center', false);
         removeFilter();
     }
+
+    function highlightByGroup(grpId){
+        filteredLinks = link.filter(d=> d.linkGroup == grpId).classed('show', true);
+        filteredLinks.each( (d) => {
+            //d.source.id
+            var filterHolder = [];
+            filterHolder.push(d.source.id);
+            filterHolder.push(d.target.id)
+            node.filter(z=> filterHolder.includes(z.id)).classed('show', true);
+        });
+    };
+    
     function highlightGroup1(){
         svg.selectAll('.node').classed('show', false);
-        svg.select('.nodes').style('filter', 'none');
         svg.selectAll('.link').classed('show', false);
-        d3.select('.vis-label').classed('show', true).text('the first mem');
-        svg.selectAll('.node.group-1').classed('show', true);
-        svg.selectAll('.link.group-1').classed('show', true);
+        svg.select('.nodes').style('filter', 'none');
+        d3.select('.vis-label').classed('show', true).html('Resulting thought: The smell of humidity makes me feel like home');
         removeFilter();
+        highlightByGroup(1);
     }
     function highlightGroup2(){
-        svg.selectAll('.node').classed('show', false);
+        //svg.selectAll('.node').classed('show', false);
         svg.select('.nodes').style('filter', 'none');
-        svg.selectAll('.link').classed('show', false);
-        d3.select('.vis-label').classed('show', true).text('the second mem')
-        svg.selectAll('.node.group-1').classed('show', true);
-        svg.selectAll('.node.group-2').classed('show', true);
-        svg.selectAll('.link.group-1').classed('show', true);
-        svg.selectAll('.link.group-2').classed('show', true);
+        // svg.selectAll('.link').classed('show', false);
+        d3.select('.vis-label').classed('show', true).html('Resulting thought: The smell of humidity makes me feel like home<br><br>That time I');
         d3.select('#vis-plural').classed('center', false);
         removeFilter();
+        highlightByGroup(2);
     }
 
     function filterEffect(){
         svg.selectAll('.node').transition().attr('r', 20);
         svg.select('.nodes').style('filter', 'url(#gooeyCodeFilter)')
+        svg.select('.links').style('filter', 'url(#gooeyCodeFilter)')
         d3.select('#vis-plural').classed('center', false);
     }
     
