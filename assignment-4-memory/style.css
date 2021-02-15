@@ -16,13 +16,13 @@ main {
     margin: auto;
 }
 
-.header-row {
+.card.header-row {
     margin: 40px 0;
     display: flex;
     align-items: center;
-    height: 100vh;
-    background: #121213cf;
-    background: #121213;
+    height: 120vh;
+    /* background: #121213cf;
+    background: #121213; */
   }
 
   h1, h1 span {
@@ -60,7 +60,7 @@ margin-bottom: 50vh;
 }
 
 .left-pane {
-    flex-basis: 50%;
+    flex-basis: 60%;
     max-width: 550px;
     width: 60%;
 }
@@ -69,6 +69,7 @@ margin-bottom: 50vh;
     flex-basis: 50%;
     text-align: right;
     position: relative;
+ 
 }
 
 .vis-holder {
@@ -77,17 +78,39 @@ margin-bottom: 50vh;
     z-index: -1;
     top: 0;
     overflow: visible;
-    width: 30%;
-    max-width: 400px;
-    max-height: 400px;
-    height: 50vh;
+    width: 60%;
+    max-width: 600px;
+    /* max-height: 400px; */
+    height: 70vh;
     margin: auto;
-    right: 10%;
-    top: 10%;
-    padding-top: 30vh;
+    right: 30%;
+    top: 100px;
     /* opacity: 0; */
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
+    opacity: 0;
+    transform: translateX(50%);
+    transition: opacity .15s ease-in-out, right .3s ease-in-out, transform .3s ease-in-out;
+}
+.vis-holder.center {
+  right: 50%;
+  transform: translateX(50%) scale(1.3);
+}
 
+
+.pane-img {
+  opacity: 0;
+  height: 0;
+  width: 0;
+ transition: opacity .3s ease-in-out;  
+}
+.pane-img img {
+  width: 100%;
+  height: 100%;
+}
+.pane-img.show {
+  opacity: 1;
+  height: auto;
+  width: auto;
 }
 
 ::-webkit-scrollbar {
@@ -95,9 +118,43 @@ margin-bottom: 50vh;
 }
  
 
+
+
  
 ::-webkit-scrollbar-thumb {
 
     background:#727274;
 
+}
+
+.link {
+  opacity: 0;
+}
+.node {
+  opacity: 0;
+}
+
+.link.show {
+  opacity: 1;
+}
+.vis-label {
+  position: absolute;
+  transform: translate(50%, 50%);
+  background: #404040;
+  width: 200px;
+  padding: 7px 10px;
+  top: 13%;
+  right: 50%;
+  opacity: 0;
+  transition: opacity .15s ease-in-out;
+  text-align: center
+}
+.vis-label.show {
+  opacity: 1;
+}
+
+
+
+.node.show {
+  opacity: 1;
 }

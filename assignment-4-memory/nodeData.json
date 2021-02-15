@@ -1,0 +1,20 @@
+// var nodeData = {
+//     "nodes": [
+//         {"id": "mem1", "group": 1}
+//         ,{"id": "mem2", "group": 1}
+//         ,{"id": "mem3", "group": 2}
+//         ,{"id": "mem4", "group": 2}
+//         ,{"id": "mem5", "group": 2}
+//         ,{"id": "mem6", "group": 4}
+//         ,{"id": "mem7", "group": 4}
+//     ], 
+//     "links": [
+//         {"source": "mem1", "target": "mem2", "value": .3  },
+//         {"source": "mem3", "target": "mem4", "value": .5  },
+//         {"source": "mem1", "target": "mem5", "value": .1  },
+//         {"source": "mem5", "target": "mem2", "value": .8  },
+//         {"source": "mem6", "target": "mem7", "value": .8 },
+//         // {"source": "mem2", "target": "mem1", "value": 5 },
+ 
+//     ]
+// }

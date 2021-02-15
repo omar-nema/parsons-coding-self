@@ -3,67 +3,77 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>sketch</title>
+    <script src='./nodeData.json'></script>
     <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 <body>
     <main>
-        <div class="header-row">
+        <div class="header-row card">
             <h1>What is a (single) memory?</h1>
         </div>
-        <div id="scrolly singular">
+        <div id="scrolly" class="singular">
             <div class="left-pane">
                 <div class="card-row">
+                    <div class="card mem-0 singular-first">
+                        To me, a single memory on its own is not significant, unless it is especially notable or traumatic.
+                    </div>
                     <div class="card mem-1">
-                        The way I see it: a memory is a piece of data.
+                        Memory gathers meaning only in groups.
                     </div>
-                    <div class="card mem-2">
-                        A single memory on its own is not significant, unless it is especially notable or traumatic.
-                    </div>
-                    <div class="card mem-3">
+
+                    <div class="card mem-2 singular-last">
                         Memory can a shape, movement, image, feeling, sound, or combination of all of these.
                     </div>                                       
                 </div>
             </div>
             <div class="right-pane">
                 <div class="vis-holder" id="vis-singular">
-                    <div class="pane-img">
-                        hello this is an img
+                    <div class="pane-img singular-1">
+                        <img src="./assets/exp1.png"/>
+                    </div>
+                    <div class="pane-img singular-2">
+                        <img src="./assets/exp2.png"/>
+                    </div>
+                    <div class="pane-img singular-3">
+                        
+                    </div>
+                    <div class="pane-img singular-4">
+                 
                     </div>
                 </div>
             </div>              
         </div>
 
-        <div class="header-row">
+        <div class="header-row card">
             <h1>What is a (the faculty of) memory?</h1>
         </div>        
-        <div id="scrolly plural">
+        <div id="scrolly" class="plural">
             <div class="left-pane">
                 <div class="card-row">
-                    <div class="card">
-                        The traditional image of memory as an interconnected network mostly aligns with my thinking. 
+                    <div class="card plural-first plural-1">
+                        The (traditional) image of memory as an interconnected network mostly aligns with my thinking. 
                     </div>
-                    <div class="card">
-                        Each node represents a memory. They can be recalled in different ways.
+                    <div class="card plural-2">
+                        Each node represents a memory. Nodes can be connected and recalled in different ways.
                     </div>
-                    <div class="card">
+                    <div class="card plural-3">
                         And thus amount to different narratives.
                     </div>                    
-                    <div class="card">
+                    <div class="card plural-4">
                         Of course, the uniform shape of these memory nodes is reductive.
                     </div>
-                    <div class="card">
+                    <div class="card plural-5">
                         I imagine memory as something more like this.
                     </div>   
-                    <div class="card">
-
-                    </div>                                                             
+                    <div class="card plural-6">
+                      this
+                    </div>  
+                                                                  
                 </div>
             </div>
             <div class="right-pane">
                 <div class="vis-holder" id="vis-plural">
-                    <div class="pane-img">
-                        nodes and such
-                    </div>
+                    <div class="vis-label"></div>
                 </div>
             </div>              
         </div>            
@@ -76,5 +86,5 @@
 </html>
 <script src="https://unpkg.com/intersection-observer"></script>
 <script src="https://unpkg.com/scrollama"></script>
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js'></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/6.5.0/d3.min.js'></script>
 <script src='./sketch.js'></script>
