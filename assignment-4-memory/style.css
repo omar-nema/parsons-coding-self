@@ -26,8 +26,8 @@ main {
   }
 
   h1, h1 span {
-    font-size: 40px;
-    font-weight: 300;
+    font-size: 44px;
+    font-weight: 400;
     text-decoration: underline;
     text-decoration-color: #aab094;
   } 
@@ -93,7 +93,8 @@ margin-bottom: 50vh;
 }
 .vis-holder.center {
   right: 50%;
-  transform: translateX(50%) scale(1.3);
+  transform: translateX(50%) translateY(-50%) scale(1.3);
+  overflow: visible;
 }
 
 
@@ -133,8 +134,8 @@ margin-bottom: 50vh;
 }
 
 
-.link.show {
-  opacity: 1;
+.link.show, .node.show {
+  opacity: .8;
 }
 .vis-label {
   position: absolute;
@@ -153,7 +154,3 @@ margin-bottom: 50vh;
 }
 
 
-
-.node.show {
-  opacity: 1;
-}

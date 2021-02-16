@@ -127,14 +127,18 @@ document.addEventListener("DOMContentLoaded", function(){
     })
     
     var cols = [
-        '#e8ddcb',
-        '#033649',
-        '#036564',
-        '#031634',
-        '#547980',
-        '#45ada8',
-        '#9de0ad',
-        '#e5fcc2'
+     
+        '#550023'
+        ,'#680043'
+        ,'#7B006B'
+        ,'#81008D'
+        ,'#6F009E'
+        ,'#6922AD'
+        ,'#6944BC'
+        ,'#7066CA'
+        ,'#8888D7'
+        ,'#AAB4E3'
+        ,'#CCD9EF'
       ];
 
      var origR = 7; 
@@ -143,8 +147,8 @@ document.addEventListener("DOMContentLoaded", function(){
         .selectAll('.link')
         .data(links)
         .join('line')
-        .attr('stroke-width', .5) 
-        .attr('stroke', 'rgba(255,255,255,.2)')
+        .attr('stroke-width', 1.5) 
+        .attr('stroke', 'rgba(255,255,255,.1)')
         .attr('class', d=>{return 'link ' + 'group-' + d.linkGroup})
         ;
 
@@ -154,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function(){
         .join('circle')
         .attr('r', origR)
         .attr('fill', d => {return cols[Math.floor(Math.random() * cols.length)]}  )
-        .attr('stroke', 'black')
+        
         .attr('class', d=>{return 'node ' + 'group-' + d.group})
     ;
 
@@ -187,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function(){
         svg.selectAll('.node').classed('show', false);
         svg.selectAll('.link').classed('show', false);
         svg.select('.nodes').style('filter', 'none');
-        d3.select('.vis-label').classed('show', true).html('Resulting thought: The smell of humidity makes me feel like home');
+        d3.select('.vis-label').classed('show', true).html('Resulting thought: <br><br>The smell of humidity feels like home.');
         removeFilter();
         highlightByGroup(1);
     }
@@ -195,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function(){
         //svg.selectAll('.node').classed('show', false);
         svg.select('.nodes').style('filter', 'none');
         // svg.selectAll('.link').classed('show', false);
-        d3.select('.vis-label').classed('show', true).html('Resulting thought: The smell of humidity makes me feel like home<br><br>That time I');
+        d3.select('.vis-label').classed('show', true).html('Resulting thought: <br><br>The smell of humidity makes me feel like home. <br>My first day in the compound. A new house (home?), a new country.');
         d3.select('#vis-plural').classed('center', false);
         removeFilter();
         highlightByGroup(2);
