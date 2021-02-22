@@ -86,6 +86,11 @@ body {
     z-index: -1;
     width: 100%;
     height: 100%;
+    transition: opacity .2s ease-in-out;
+}
+
+#map.inactive {
+    opacity: .2;
 }
 
 .card {
@@ -113,4 +118,34 @@ main {
     padding-top: 50px;
     flex-direction: column;
     /* pointer-events: none; */
+}
+
+#img-holder {
+    max-width: 400px;
+    position: fixed;
+    top: 100px;
+    left: 150px;
+    pointer-events: none;
+}
+
+.card.img-card {
+    padding: 0;
+}
+.card img {
+    max-width: 100%;
+}
+
+#img-holder img {
+    opacity: 0;
+    height: 0;
+    width: 0;
+    transition: all .15s ease-in-out;
+    pointer-events: none;    
+    box-shadow: 0 1px 1px 1px rgb(0 0 0 / 10%); 
+    border: 1px solid black;   
+}
+#img-holder img.active {
+    opacity: 1;
+    width: 100%;
+    height: auto;
 }

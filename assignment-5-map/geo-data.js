@@ -1,21 +1,24 @@
 infoData = {
   "type": "FeatureCollection",
   "features": [
+
+    //golf course
     {
       "type": "Feature",
-      "properties":{ "name": "here", "group_name": "favs", "group_id": 1, "placeName": "home", "story": storyGolf, "color": "#660000", "radius": "7" },
+      "properties":{ "name": "golf", "group_name": "favs", "group_id": 1, "placeName": "home", "story": storyGolf, "color": "#660000", "radius": "7" },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          50.11598581062966, 26.302669398317974
+          50.11781915325459, 26.29834249016905
         ]
-        
+
       }
     },
 
+    //dining hall
     {
       "type": "Feature",
-      "properties":{ "name": "here", "group_name": "favs", "group_id": 1, "placeName": "home", "story": storyDining, "color": "#660000", "radius": "7" },
+      "properties":{ "name": "dining", "group_name": "favs", "group_id": 1, "placeName": "home", "story": storyDining, "color": "#660000", "radius": "7" },
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -25,9 +28,10 @@ infoData = {
       }
     },
 
+    //random road
     {
       "type": "Feature",
-      "properties":{ "name": "here", "group_name": "favs", "group_id": 1, "placeName": "home", "story": storyDriving, "color": "#660000", "radius": "7" },
+      "properties":{ "name": "randroad", "group_name": "favs", "group_id": 1, "placeName": "home", "story": storyDriving, "color": "#660000", "radius": "7" },
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -37,9 +41,11 @@ infoData = {
       }
     },
 
+
+    //masjid
     {
       "type": "Feature",
-      "properties":{ "name": "here", "group_name": "favs", "group_id": 1, "placeName": "home", "story": storyDrivingMosque, "color": "#660000", "radius": "7" },
+      "properties":{ "name": "masjid", "group_name": "favs", "group_id": 1, "placeName": "home", "story": storyDrivingMosque, "color": "#660000", "radius": "7" },
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -50,9 +56,10 @@ infoData = {
     },
 
 
+    //house
     {
       "type": "Feature",
-      "properties":{ "name": "here", "group_name": "favs", "group_id": 1, "placeName": "home", "story": storyHouse, "color": "#660000", "radius": "7" },
+      "properties":{ "name": "house", "group_name": "favs", "group_id": 1, "placeName": "home", "story": storyHouse, "color": "#660000", "radius": "7" },
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -62,17 +69,44 @@ infoData = {
       }
     },
 
+    //aramco
     {
       "type": "Feature",
-      "properties":{ "name": "here", "group_name": "favs", "group_id": 1, "placeName": "home", "story": storyAramco1, "color": "#660000", "radius": "7" },
+      "properties":{ "name": "aramcozoomout", "group_name": "favs", "group_id": 1, "placeName": "home", "story": storyAramco1, "color": "#660000", "radius": "7" },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          50.13954162597656,  26.316805571252356
+          50.134347258211356,  26.30260427489283
         ]
         
       }
     },
+
+  {
+    //driving pin 1
+    "type": "Feature",
+    "properties":{ "name": "driving1", "group_name": "favs", "group_id": 1, "placeName": "home", "story": storyAramco1, "color": "#660000", "radius": "7" },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        50.124191540670104,  26.30475934077
+      ]
+      
+    }
+  },
+
+  {
+    //driving pin 2
+    "type": "Feature",
+    "properties":{ "name": "driving2", "group_name": "favs", "group_id": 1, "placeName": "home", "story": storyAramco1, "color": "#660000", "radius": "7" },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        50.107570130590204,  26.2939418465
+      ]
+      
+    }
+  },
 
  
       

@@ -13,7 +13,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqc
 
 var map = new mapboxgl.Map({
     container: 'map', // HTML container ID
-    style: 'mapbox://styles/mapbox/light-v10', // style URL
+    style: 'mapbox://styles/mapbox/outdoors-v10', // style URL
     center: [-21.9270884, 64.1436456], // starting position as [lng, lat]
     zoom: 13
 });
@@ -177,22 +177,35 @@ $(document).ready(function () {
     .onStepEnter((r) => {
       elusiveHover = true;
 
+        document.querySelector('#map').classList.remove('inactive');
     
         if (r.element.classList.contains('card-golf')){
+        
             map.flyTo({
                 center: infoData.features[0].geometry.coordinates,essential: true, zoom: 17
             });
         }
         else if (r.element.classList.contains('card-dining')){
+     
             map.flyTo({
                 center: infoData.features[1].geometry.coordinates,essential: true, zoom: 15
             });
         }
-        else if (r.element.classList.contains('card-driving')){
+        else if (r.element.classList.contains('card-driving-intro')){
             map.flyTo({
-                center: infoData.features[2].geometry.coordinates,essential: true, zoom: 17
+                center: infoData.features[1].geometry.coordinates,essential: true, zoom: 15
             });
         }
+        else if (r.element.classList.contains('card-driving-one')){
+            map.flyTo({
+                center: infoData.features[6].geometry.coordinates,essential: true, zoom: 17
+            });
+        }        
+        else if (r.element.classList.contains('card-driving-two')){
+            map.flyTo({
+                center: infoData.features[7].geometry.coordinates,essential: true, zoom: 17
+            });
+        }     
         else if (r.element.classList.contains('card-mosque')){
             map.flyTo({
                 center: infoData.features[3].geometry.coordinates,essential: true, zoom: 17
@@ -202,10 +215,16 @@ $(document).ready(function () {
             map.flyTo({
                 center: infoData.features[4].geometry.coordinates,essential: true, zoom: 17
             });
-        }                  
-        else if (r.element.classList.contains('card-aramco')){
+        }               
+        else if (r.element.classList.contains('card-aramco-intro')){
             map.flyTo({
-                center: infoData.features[5].geometry.coordinates,essential: true, zoom: 17
+                center: infoData.features[5].geometry.coordinates,essential: true, zoom: 13
+            });
+        }        
+        else if (r.element.classList.contains('card-aramco')){
+            document.querySelector('#map').classList.add('inactive');
+            map.flyTo({
+                center: infoData.features[5].geometry.coordinates,essential: true, zoom: 13
             });
         }            
      
