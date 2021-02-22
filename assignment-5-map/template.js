@@ -188,7 +188,7 @@ $(document).ready(function () {
         else if (r.element.classList.contains('card-dining')){
      
             map.flyTo({
-                center: infoData.features[1].geometry.coordinates,essential: true, zoom: 15
+                center: infoData.features[1].geometry.coordinates,essential: true, zoom: 17
             });
         }
         else if (r.element.classList.contains('card-driving-intro')){
@@ -217,6 +217,7 @@ $(document).ready(function () {
             });
         }               
         else if (r.element.classList.contains('card-aramco-intro')){
+           
             map.flyTo({
                 center: infoData.features[5].geometry.coordinates,essential: true, zoom: 13
             });
