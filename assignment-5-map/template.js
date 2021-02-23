@@ -227,7 +227,11 @@ $(document).ready(function () {
             map.flyTo({
                 center: infoData.features[5].geometry.coordinates,essential: true, zoom: 13
             });
-        }            
+        }  
+        
+        else if (r.element.classList.contains('card-last')){
+            document.querySelector('#map').classList.add('inactive-last');
+        }    
      
     })
     .onStepExit((r) => {
