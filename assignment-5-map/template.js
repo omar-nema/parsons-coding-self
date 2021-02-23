@@ -178,6 +178,7 @@ $(document).ready(function () {
       elusiveHover = true;
 
         document.querySelector('#map').classList.remove('inactive');
+        document.querySelector('#map').classList.remove('inactive-last');
     
         if (r.element.classList.contains('card-golf')){
         
