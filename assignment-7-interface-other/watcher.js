@@ -1,51 +1,61 @@
-//all sites
-//or one site to optimize for?
-
-
-
 console.log('CONTENT SCRIPT')
-//
-document.querySelectorAll('div')
 
-//no children?
+var select = document.createElement('select');
+select.innerHTML = '<select name="decayTime" id="decay"><option value="1">1 minute decay</option><option value="2">5 minutes</option><option value="3">1 hour decay</option><option value="4">1 day decay</option></select>';
+select.className = 'decayTime'
+select.style = 'position: fixed; z-index:1000000; top:20px; right: 50px; font-size:14px;'
 
-//no children --> get text > x char
-//text nodes
+document.querySelector('body').appendChild(select);
 
 function textNodesUnder(el){
     var n, a=[], walk=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null,false);
     while(n=walk.nextNode()) a.push(n);
     return a;
 }
-// for each piece of text, wipe out the text
-//replace with new textNode
 
 var allTextNodes = textNodesUnder(document.querySelector('body'));
-console.log(allTextNodes); 
+
+//calculate decay time
+var currDecayTime = document.querySelector('.decayTime').value;
+var decayFactor = 1;
+
+document.querySelector('.decayTime').onchange= function(){
+    console.log('kaaay')
+}
+
+//time function
 
 
 
-//decay lifecycle
-//happens over time
-
+//decay dem elements
 allTextNodes.forEach(function(txtNode){
     var alphaLength = txtNode.textContent.replace(/[^a-z0-9]/gi,'').length;
     if (alphaLength > 0) {
         splitNode = txtNode.textContent.replace(/(\r\n|\n|\r)/gm, "").split(' ');
-        console.log(splitNode);
-        splitNode.forEach(word => {
 
+        splitNode.forEach(word => {
             if (word != ''){
                 var parentStyles = 'flex-wrap: wrap; display: flex; align-content: flex-start'
         
                 var spanWrapper = document.createElement('span');
                 spanWrapper.innerHTML = word + '&nbsp;';
-                spanWrapper.style.opacity = .5 + Math.round(Math.random()*5)/10;
-                var skewMax = 5;
+       
+                var skewMax = 1*decayFactor;
                 var skewX = Math.round(skewMax*(Math.random()*10/10)) - Math.round(skewMax*(Math.random()*10/10))  ;
                 var skewY = Math.round(skewMax*(Math.random()*10/10)) - Math.round(skewMax*(Math.random()*10/10));
-                spanWrapper.style.transform = `skew(${skewX}deg, ${skewY}deg)`;
-                var filterAmt = Math.random();
+
+                var opacityMaxReduction = 0.5*(decayFactor);
+                spanWrapper.style.opacity = (1-opacityMaxReduction) + opacityMaxReduction*Math.round(Math.random()*10)/10;
+
+                var translateMax = 1*decayFactor;
+                var translateX = Math.round(skewMax*(Math.random()*10/10)) - Math.round(skewMax*(Math.random()*10/10))  ;
+                var translateY = Math.round(skewMax*(Math.random()*10/10)) - Math.round(skewMax*(Math.random()*10/10));
+                //spanWrapper.style.transform = `skew(${skewX}deg, ${skewY}deg)`;
+               
+                spanWrapper.style.transform = `translate(${translateX}px, ${translateY}px) skew(${skewX}deg, ${skewY}deg)`;                
+                
+    
+                var filterAmt = 2*Math.random()*decayFactor;
                 spanWrapper.style.filter = `blur(${filterAmt}px)`;
     
                 txtNode.parentNode.style = parentStyles;
@@ -53,7 +63,6 @@ allTextNodes.forEach(function(txtNode){
             }
 
 
-     
         })
     
         txtNode.textContent = ' ';
