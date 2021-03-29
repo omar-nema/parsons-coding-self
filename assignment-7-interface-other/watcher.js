@@ -13,319 +13,159 @@ function textNodesUnder(el){
     return a;
 }
 
-var allTextNodes = textNodesUnder(document.querySelector('body'));
+
 
 //calculate decay time
 var currDecayTime = document.querySelector('.decayTime').value;
-var decayFactor = 1;
+var decayFactor = .05;
+var runPerSec = 1;
+var numIterations = 60/runPerSec;
+
+// numIterations = 60*5;
+
+function updateIterations(){
+    if (decayFactor == '1'){
+        numIterations = 60/runPerSec;
+    } else if (decayFactor == '2'){
+        numIterations = 60*5/runPerSec;
+    } else if (decayFactor == '2'){
+        numIterations = 60*60/runPerSec;
+    } else if (decayFactor == '2'){
+        numIterations = 60*60*24/runPerSec;
+    }
+}
+updateIterations();
 
 document.querySelector('.decayTime').onchange= function(){
     console.log('kaaay')
 }
 
-//time function
+//p5 dray function
 
 
 
-//decay dem elements
-allTextNodes.forEach(function(txtNode){
-    var alphaLength = txtNode.textContent.replace(/[^a-z0-9]/gi,'').length;
-    if (alphaLength > 0) {
-        splitNode = txtNode.textContent.replace(/(\r\n|\n|\r)/gm, "").split(' ');
 
-        splitNode.forEach(word => {
-            if (word != ''){
-                var parentStyles = 'flex-wrap: wrap; display: flex; align-content: flex-start'
+var parsedNodes = [];
+//initialize new elements
+
+function randomNeg(){
+    return (Math.random() - 0.5) * 2;   
+}
+function helperFloat(num){
+    return parseFloat(num.match(/[-+]?([0-9]*\.[0-9]+|[0-9]+)/)[0]);
+}
+
+
+
+async function initTextNodes(){
+    var allTextNodes = textNodesUnder(document.querySelector('body'));
+
+
+    allTextNodes.forEach(function(txtNode){
+        var alphaLength = txtNode.textContent.replace(/[^a-z0-9]/gi,'').length;
+        if (alphaLength > 0) {
+            splitNode = txtNode.textContent.replace(/(\r\n|\n|\r)/gm, "").split(' ');
+    
+            splitNode.forEach(word => {
+                if (word != ''){
+                    var parentStyles = 'flex-wrap: wrap; display: flex; align-content: flex-start'
+            
+                    var spanWrapper = document.createElement('span');
+                    spanWrapper.innerHTML = word + '&nbsp;';
+           
+                    var skewMax = 1*decayFactor;
+                    var skewX =  skewMax*( randomNeg())  ;
+                    var skewY =  skewMax*( randomNeg()) 
+    
+                    var opacityMaxReduction = 0.5*(decayFactor);
+                    spanWrapper.style.opacity = (1-opacityMaxReduction) + opacityMaxReduction*Math.round(Math.random()*10)/10;
+    
+                    var translateMax = 1*decayFactor;
+                    var translateX = skewMax*( randomNeg()) 
+                    var translateY =  skewMax*( randomNeg()) 
+                    //spanWrapper.style.transform = `skew(${skewX}deg, ${skewY}deg)`;
+                   
+                    spanWrapper.style.transform = `translate(${translateX}px, ${translateY}px) skew(${skewX}deg, ${skewY}deg)`;       
+                    spanWrapper.style.transition = 'all .1s ease-in-out';         
+                    
         
-                var spanWrapper = document.createElement('span');
-                spanWrapper.innerHTML = word + '&nbsp;';
-       
-                var skewMax = 1*decayFactor;
-                var skewX = Math.round(skewMax*(Math.random()*10/10)) - Math.round(skewMax*(Math.random()*10/10))  ;
-                var skewY = Math.round(skewMax*(Math.random()*10/10)) - Math.round(skewMax*(Math.random()*10/10));
-
-                var opacityMaxReduction = 0.5*(decayFactor);
-                spanWrapper.style.opacity = (1-opacityMaxReduction) + opacityMaxReduction*Math.round(Math.random()*10)/10;
-
-                var translateMax = 1*decayFactor;
-                var translateX = Math.round(skewMax*(Math.random()*10/10)) - Math.round(skewMax*(Math.random()*10/10))  ;
-                var translateY = Math.round(skewMax*(Math.random()*10/10)) - Math.round(skewMax*(Math.random()*10/10));
-                //spanWrapper.style.transform = `skew(${skewX}deg, ${skewY}deg)`;
-               
-                spanWrapper.style.transform = `translate(${translateX}px, ${translateY}px) skew(${skewX}deg, ${skewY}deg)`;                
-                
+                    var filterAmt = 2*Math.random()*decayFactor;
+                    spanWrapper.style.filter = `blur(${filterAmt}px)`;
+        
+                    txtNode.parentNode.style = parentStyles;
     
-                var filterAmt = 2*Math.random()*decayFactor;
-                spanWrapper.style.filter = `blur(${filterAmt}px)`;
-    
-                txtNode.parentNode.style = parentStyles;
-                txtNode.parentNode.appendChild(spanWrapper);
-            }
+                    parsedNodes.push(spanWrapper);
+                    txtNode.parentNode.appendChild(spanWrapper);
+                }
+            })
+        
+            txtNode.textContent = ' ';
+           
+        }
+    });
 
+    setTimeout(initImages,3000);
 
+    function initImages() {
+        var allImages = document.querySelectorAll('img');
+        console.log(allImages);
+        allImages.forEach(img => {
+            img.style.transform = 'translate(0px,0px) skew(0deg, 0deg)';
+            img.style.opacity = '1';
+            img.style.filter= 'blur(0px)'
+            parsedNodes.push(img);
         })
-    
-        txtNode.textContent = ' ';
-       
-
-        //txtNode.parentNode.style.opacity = .5 + Math.round(Math.random()*5)/10;
-        // txtNode.parentNode.style.opacity = 0.3 + Math.round(Math.random()*8)/8;
-
-        // var skewMax = 20;
-        // var skewX = Math.round(skewMax*(Math.random()*10/10)) - Math.round(skewMax*(Math.random()*10/10))  ;
-        // var skewY = Math.round(skewMax*(Math.random()*10/10)) - Math.round(skewMax*(Math.random()*10/10));
-
-        // txtNode.parentNode.style.transform = `skew(${skewX}deg, ${skewY}deg)`;
+        return parsedNodes;
     }
 
-    //console.log(txt.textContent.replace(' ', ''), txt.textContent.replace(' ', '').length, txtAlpha);
-
-    //console.log(txt.parentNode)
-    //
-});
+   
+} 
 
 
-//innerText, textConten
+initTextNodes().then(d => {
+    initInc();
+})
 
 
-// var words = document.querySelectorAll('div')
+let maxOpacity = 4;
+let maxTransform = 20;
+let maxBlur = 50;
+let maxSkew = 20;
 
-// var words = ("p").text().split(" ");
-// $("p").empty();
-// $.each(words, function(i, v) {
-//     $("p").append($("<span>").text(v));
-// });
-
-
-// console.log('hhere BITCH')
-
-
-
-// var mainCont = document.querySelector('#react-root');
-// var mainShell = document.querySelector('main');
-// var pageState = 'intro';
-// var emulationStop = false; 
-
-// //watch for message if extension is enabled or disabled
-// //depending on msg, enable or disable styles
-// chrome.runtime.onMessage.addListener(
-//     function(request, sender, sendResponse) {
-//     if (request.status == 'true'){
-//         console.log('enabled')
-//         insertStyles();
-//     } else {
-//         console.log('disabled')
-//         removeStyles();
-//     }
-//   });
-
-//   initScript();
-//   var link = document.createElement("link");
-//   insertStyles();
-
-//   function insertStyles() {
-//     // var head = document.head;
-//     link.type = "text/css";
-//     link.rel = "stylesheet";
-//     //link.href = 'watcherStyles.css';
-//     link.href = chrome.extension.getURL("watcherStyles.css");
-//     document.getElementsByTagName("head")[0].appendChild(link);
-//     //head.appendChild(link);
-//   }
-
-//   function removeStyles(){
-//     document.getElementsByTagName("head")[0].removeChild(link);
-//   }
-
-//   function initScript(){
-//     waitForElm('nav').then(e => {
-//         mainCont.className = 'inactive';
-//         initIntroModal();
-//         initHeaderActions();
-//         chrome.storage.sync.get(['pageVisited'], function(p){
-//             adjustUI();
-//         }); 
-//     });
-//   }
- 
-
-// function waitForElm(selector) {
-//     return new Promise(resolve => {
-//         if (document.querySelector(selector)) {
-//             return resolve(document.querySelector(selector));
-//         }
-
-//         const observer = new MutationObserver(mutations => {
-//             if (document.querySelector(selector)) {
-//                 resolve(document.querySelector(selector));
-//                 observer.disconnect();
-//             }
-//         });
-
-//         observer.observe(document.body, {
-//             childList: true,
-//             subtree: true
-//         });
-//     });
-// }
-
-// function initIntroModal(){
-//     //intro modal
-//     let introCont = document.createElement('div');
-//     introCont.className = 'intro inactive';
-//     introCont.innerHTML = '<div class="headerCustom">Instagram Mirror</div><div class="subhead">Watch yourself browse Instagram.</div>';
-//     document.querySelector('body').appendChild(introCont);
-  
-//     let recordBtn = document.createElement('div');
-//     recordBtn.innerHTML = '<div class="startScroll">Start Browsing</div>';
-//     introCont.appendChild(recordBtn);
-//     recordBtn.onclick = function(e){
-//         pageState = 'watching';
-//         adjustUI();
-//         chrome.storage.local.set({"scrollArray": []});
-//         document.addEventListener('scroll', scrollListener, true);
-//     }
-//     document.querySelector('.intro').className = 'intro';
-// }
-
-// function initHeaderActions(){
-
-//     let headerCont = document.createElement('div');
-//     headerCont.className = "headerCont";
-//     mainCont.appendChild(headerCont);
-
-//     let headerDec = document.createElement('div');
-//     headerDec.className = "headerDec";
-//     headerDec.innerHTML = '<div>Instagram Mirror</div>';
-//     headerCont.appendChild(headerDec);
-
-//     let headerHolder = document.createElement('div');
-//     headerHolder.className = "headerHolder";
-//     headerCont.appendChild(headerHolder);
- 
-//     let btnReplay = document.createElement('div');
-//     btnReplay.className = "btnReplay headerFloat hidden";
-//     btnReplay.innerHTML = '<div>Replay</div>';
-//     btnReplay.onclick = function(e){
-//         emulationStop = true;
-//         //chrome.storage.sync.set({pageVisited: true});
-//         scrollEmulation();
-//     }
-//     headerHolder.appendChild(btnReplay);
-
-//     let btnNewSesh = document.createElement('div');
-//     btnNewSesh.className = "btnNew headerFloat hidden";
-//     btnNewSesh.innerHTML = '<div>New Session</div>';
-//     btnNewSesh.onclick = function(e){
-//         chrome.storage.local.set({"scrollArray": []});
-//         location.reload();
-//     }
-//     headerHolder.appendChild(btnNewSesh);
-
-//     let playBtn = document.createElement('div');
-//     playBtn.className = "startPlay disabled headerFloat";
-//     playBtn.innerHTML = '<div>Done Browsing</div>';
-//     playBtn.onclick = function(e){
-//         pageState = 'playing';
-//         adjustUI();
-//         scrollEmulation();
-//     }
-//     headerHolder.appendChild(playBtn);
-
-
-
-//     let playFeedback = document.createElement('div');
-//     playFeedback.className = "playFeedback hidden";
-//     playFeedback.innerHTML = '<div>Playing back your browsing session</div>';
-//     mainCont.appendChild(playFeedback);
-
-//     let helpBtn = document.createElement('div');
-//     helpBtn.className = "helpBtn headerFloat";
-//     helpBtn.innerHTML = '<div>?</div>';
-//     headerCont.appendChild(helpBtn);
-
-//     let helpTip = document.createElement('div');
-//     helpTip.className = "helpTip";
-
-//     mainCont.appendChild(helpTip);
-
-//     helpBtn.onclick = function(e){
-//         if (this.classList.contains('active')){
-//             this.classList.remove('active');
-//             helpTip.className = 'helpTip'
-//         } else {
-//             this.classList.add('active');
-//             helpTip.className = 'helpTip show'
-//             if (pageState =='watching'){
-//                 helpTip.innerHTML = "<div>Your scrolling activity is currently being watched. After clicking the 'Done Browsing' button in the header, your scrolling activity will be played back to you.</div>";
-//             } else {
-//                 helpTip.innerHTML = "<div>Watch your browsing session. Click 'replay' to play session from the start. 'New session' will refresh your browser and allow you to record a new session.</div>";
-//             }
-//             setTimeout(function(){
-//                 helpTip.className = 'helpTip';
-//                 helpBtn.classList.remove('active');     
-//             }, 5000)
-//         }
-//     }
-
-// }
-
-
-// async function adjustUI(){
-  
-//     if (pageState == 'intro'){
-//         document.querySelector('.intro').className = 'intro';
-//         mainCont.classList.remove('inactive');
-//         mainCont.classList.add('inactive');
-//     } else if (pageState =='watching'){
-//         document.querySelector('.intro').className = 'intro inactive';
-//         mainCont.classList.remove('inactive');
-//         document.querySelector('.startPlay').classList.remove('hidden');
-//     } else if (pageState == 'playing'){
-//         var playfeedback = document.querySelector('.playFeedback');
-//         playfeedback.classList.remove('hidden');
-//         setTimeout(function(){playfeedback.classList.add('hidden')}, 3000)
-//         document.querySelector('.startPlay').classList.add('hidden');
-//         document.querySelector('.btnReplay').classList.remove('hidden');
-//         document.querySelector('.btnNew').classList.remove('hidden');
-//     }
-// }
-
-// var scrollListener = function(e) {
-//     chrome.storage.local.get('scrollArray',  function(data) {
-//         var scrollObj;
-//         if (data.scrollArray.length > 0){
-//             document.querySelector('.startPlay').classList.remove('disabled');
-//             scrollObj = {"scrollPos": window.scrollY, "timestamp": Date.now(), "elapsedTime": Date.now() - data.scrollArray[0].timestamp};
-//         } else {
-//             scrollObj = {"scrollPos": window.scrollY, "timestamp": Date.now(), "elapsedTime": 0};
-//         }
-//         data.scrollArray.push(scrollObj);
-//         chrome.storage.local.set({"scrollArray": data.scrollArray});
-//         // console.log(data.scrollArray)
-//     })
-// };
-
-// function scrollEmulation(){
+function initInc(){
+    var runs = 0;
+    var updateStyles = setInterval(function(){ 
+        console.log('and 1')
+        if (++runs == numIterations){
+            window.clearInterval(updateStyles);
+        }
+        parsedNodes.forEach(n => {
+            currOpacity = parseFloat(n.style.opacity);
+            currBlur = helperFloat(n.style.filter);
+          
+            transformFull = n.style.transform.split(') ')[0];
+            skewFull = n.style.transform.split(') ')[1];
+            currTranslate = [helperFloat(transformFull.split(',')[0]), helperFloat(transformFull.split(',')[1]) ];
+            currSkew = [helperFloat(skewFull.split(',')[0]), helperFloat(skewFull.split(',')[1]) ];
+                   
+            var opacityInc = Math.random()*(maxOpacity/numIterations);
+            var transformInc = [ randomNeg()*(maxTransform/numIterations), randomNeg()*(maxTransform/numIterations)];
+            var skewInc = [ Math.random()*(maxSkew/numIterations), Math.random()*(maxSkew/numIterations)];
+            var blurInc =  Math.random()*(maxBlur/numIterations); 
+            
+            
+            var transformString = `translate(${currTranslate[0]+transformInc[0]}px, ${currTranslate[1]+transformInc[1]}px) skew(${currSkew[0]+skewInc[0]}deg, ${currSkew[1]+skewInc[1]}deg)`; 
+            var blurString = `blur(${currBlur + blurInc}px)`;
     
-//     mainShell.classList.add('inactive');
-//     document.removeEventListener('scroll', scrollListener, true);
-//     chrome.storage.local.get('scrollArray',  localData => {
+            n.style.opacity = currOpacity-opacityInc;
+            n.style.transform = transformString;
+            n.style.filter = blurString;
+        
+        });
+    
+    }, 1000);
+    
+}
 
-//         //requires promises
-//         window.scrollTo(0, localData.scrollArray[0].scrollPos);
-  
-//         localData.scrollArray.forEach( async (s, i) => {
-          
-//             await window.setTimeout(function(){
-//                 window.scrollTo({top: s.scrollPos,behavior: 'smooth'});
-//                 if (i == localData.scrollArray.length-1){
-//                     mainShell.classList.remove('inactive');
-//                 };
-//             }, s.elapsedTime);
 
-         
-          
-//         });  
-//     })
-// }
+
