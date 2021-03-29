@@ -13,15 +13,11 @@ function textNodesUnder(el){
     return a;
 }
 
-
-
 //calculate decay time
 var currDecayTime = document.querySelector('.decayTime').value;
 var decayFactor = .05;
 var runPerSec = 1;
 var numIterations = 60/runPerSec;
-
-// numIterations = 60*5;
 
 function updateIterations(){
     if (decayFactor == '1'){
@@ -40,13 +36,7 @@ document.querySelector('.decayTime').onchange= function(){
     console.log('kaaay')
 }
 
-//p5 dray function
-
-
-
-
 var parsedNodes = [];
-//initialize new elements
 
 function randomNeg(){
     return (Math.random() - 0.5) * 2;   
@@ -54,10 +44,27 @@ function randomNeg(){
 function helperFloat(num){
     return parseFloat(num.match(/[-+]?([0-9]*\.[0-9]+|[0-9]+)/)[0]);
 }
+function createCrack(){
+    crackLength = 1000 + Math.random()*500;
+    crack = document.createElement('div');
+    crack.style.height = '0.2px';
+    crack.className = 'crack';
+    crack.style.position = 'fixed';
+    crack.style.top = Math.round(Math.random()*100) + '%';
+    crack.style.left = Math.round(Math.random()*150)-70 + '%';        
+    crack.style.width = crackLength.toString() + 'px';
+    crack.style.background = 'rgba(0,0,0, 0.1)';
+    crack.style.filter = 'blur('+ Math.random() + 'px)'
+    crack.style.transform = 'rotate(' + Math.round(randomNeg()*100).toString() + 'deg)'
+    document.querySelector('body').appendChild(crack);
+    numCracks = 300;
+}
 
 
 
-async function initTextNodes(){
+//ideally this would rescrape all nodes
+
+function scrapeAndDistort(){
     var allTextNodes = textNodesUnder(document.querySelector('body'));
 
 
@@ -104,7 +111,14 @@ async function initTextNodes(){
         }
     });
 
-    setTimeout(initImages,3000);
+    return parsedNodes;
+}
+
+
+async function initTextNodes(){
+  
+    return scrapeAndDistort();
+    // setTimeout(initImages,3000);
 
     function initImages() {
         var allImages = document.querySelectorAll('img');
@@ -127,10 +141,12 @@ initTextNodes().then(d => {
 })
 
 
-let maxOpacity = 4;
-let maxTransform = 20;
-let maxBlur = 50;
-let maxSkew = 20;
+let maxOpacity = 1;
+let maxTransform = 3;
+let maxBlur = 3;
+let maxSkew = 3;
+let numCracks = 300;
+let cracksPerIteration = numCracks/numIterations;
 
 function initInc(){
     var runs = 0;
@@ -162,6 +178,10 @@ function initInc(){
             n.style.filter = blurString;
         
         });
+
+        for (var i =0; i< cracksPerIteration; i++){
+            createCrack();
+        }
     
     }, 1000);
     
