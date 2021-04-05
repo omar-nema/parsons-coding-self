@@ -116,29 +116,32 @@ function scrapeAndDistort(){
 
 
 async function initTextNodes(){
-  
     return scrapeAndDistort();
-    // setTimeout(initImages,3000);
-
-    function initImages() {
-        var allImages = document.querySelectorAll('img');
-        console.log(allImages);
-        allImages.forEach(img => {
-            img.style.transform = 'translate(0px,0px) skew(0deg, 0deg)';
-            img.style.opacity = '1';
-            img.style.filter= 'blur(0px)'
-            parsedNodes.push(img);
-        })
-        return parsedNodes;
-    }
-
-   
 } 
 
+async function initImages() {
+    var allImages = document.querySelectorAll('img');
+    allImages.forEach(img => {
+        img.style.transform = 'translate(0px,0px) skew(0deg, 0deg)';
+        img.style.opacity = '1';
+        img.style.filter= 'blur(0px)'
+        parsedNodes.push(img);
+    })
+    return parsedNodes;
+}
 
-initTextNodes().then(d => {
-    initInc();
-})
+
+initImages();
+
+setTimeout(function(){
+    initTextNodes().then(z => {
+      initImages();
+    }).then(d => {
+        initInc();
+    })
+    
+}, 3000)
+
 
 
 let maxOpacity = 1;
@@ -149,6 +152,8 @@ let numCracks = 300;
 let cracksPerIteration = numCracks/numIterations;
 
 function initInc(){
+
+    console.log(parsedNodes);
     var runs = 0;
     var updateStyles = setInterval(function(){ 
         console.log('and 1')
