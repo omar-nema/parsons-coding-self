@@ -1,107 +1,72 @@
 document.addEventListener("DOMContentLoaded", function() {
   
 
+
+  tooltip = document.querySelector('.tooltip');
+
+
   
+  fetch('./combinedRooms.svg')
+    .then(r => r.text())
+    .then(text => {
+        document.querySelector('.floor-plan').innerHTML = text;
+    }).then(initUI);
+    // .catch(console.error.bind(console));
 
-    // let floorPlan;
-    // let svg = d3.select('svg.floor-plan');
-    // let svgDim = svg.node().getBoundingClientRect()
-  
-    // d3.csv('./floor-plan.csv', d =>  d).then( data => {
+    function initUI(){
 
-    //   let dataNested = d3.groups(data, d=> d.room, d=>d.parentObject);
-    //   console.log(dataNested)
-    //   let rooms = svg.selectAll('.room').data(dataNested, d=>d[0])
-    //   .join('svg')
-    //   .each(function(d){
-    //     let width, height, x, y;
-    //     if (d[0] == 'bedroom'){
-    //       width = '60%';
-    //       height = '60%';
-    //       x = '40%';
-    //       y = '0%';
-    //     } else if (d[0]=='office'){
-    //       width = '36%';
-    //       height = '60%';
-    //       x = '0%';
-    //       y = '0%';
-    //     }
-    //     d3.select(this)
-    //       .attr('class', 'room-container')
-    //       .attr('width', width)
-    //       .attr('height', height)
-    //       .attr('x', x)
-    //       .attr('y', y)
-    //     .append('rect')
-    //       .attr('class', 'room')
-    //       .attr('width', '100%')
-    //       .attr('height', '100%')
-    //       .attr('stroke', 'gray')  
-    //   })
-     
-    //   ;
+      var ids = ['#click-boxBooks', '#click-cushion'];
 
-    //   rooms.each(function(d){
-    //     console.log(d)
-    //   });
+      d3.csv('./floor-plan.csv').then(rows=> {
 
-
-    //   function toPercent(x){
-    //     return (100*x).toString() + '%';
-    //   }
-
-    //   function addObjectProperties(currSel, obj){
-    //     currSel
-    //       .attr('width', d=> toPercent(obj.sizeX))
-    //       .attr('height', d=> toPercent(obj.sizeY))
-    //       .attr('x', d=> toPercent(obj.coordX))
-    //       .attr('y', d=> toPercent(obj.coordY))
-    //       .attr('stroke', 'gray')
-    //     .append('rect')
-    //       .attr('class', 'room')
-    //       .attr('width', '100%')
-    //       .attr('height', '100%')
-    //       .attr('stroke', 'gray')
-    //   }
-
-    //   let objectsParent = d3.selectAll('.room-container').selectAll('.object.parent').data( d=> d[1]).join('svg').attr('class', 'object parent').each(function(d) {
-    //     currSel = d3.select(this);
-    //     //only add if no children
-    //     d[1].forEach(obj => {
-    //       if (obj.childObject == ''){
-    //         addObjectProperties(currSel, obj);
-    //       }
-    //     })
-    //   });
-
-    //   let objectsChildren = objectsParent.selectAll('.object.children').data( d=> d[1]).join('rect')
-    //   .attr('class', 'object children')
-    //   .each(function(d){
-    //     if (d.childObject != ''){
-    //       d3.select(this)
-    //       .attr('width', d=> toPercent(d.sizeX))
-    //       .attr('height', d=> toPercent(d.sizeY))
-    //       .attr('x', d=> toPercent(d.coordX))
-    //       .attr('y', d=> toPercent(d.coordY))
-    //       .attr('stroke', 'gray')
-    //       .attr('fill', 'gray')
-    //       .append('text')
-    //     }
+        rows.forEach(d=> {
+          el = document.querySelector('#'+d.id);
+          if (el){
        
-    //   })
-   
-
-
-    // });
-  
-
+            el.addEventListener('click', e => {
+              console.log(d.id)
+              e.stopPropagation();
+            });
+            el.addEventListener('mouseover', e=>{
+              tooltip.innerHTML = `<div>${d.notes}</div>`
+              tooltip.style.top = e.clientY + 20 +  'px';
+              tooltip.style.left = e.clientX + 10 + 'px';
+              tooltip.className = 'tooltip';
+              e.stopPropagation();
+            });
+            
+            el.addEventListener('mouseout', e=>{
+              tooltip.innerHTML = '';
+              tooltip.className = 'tooltip hidden';
     
+            })
+            
+            // .addEventListener('mouseout', e=>{
+            //   el.style.opacity = 1;
+            // });
+            el.style.cursor = 'pointer';
+           
+          } else {
+            console.log('No element found ', d.id);
+          }    
+        })
 
-    // d3.select('.floor-plan').append('rect')
-    //   .attr('class', 'room')
-    //   .attr('x','0')
-    //   .attr('y','0')
-    //   .attr('width', '50px')
-    //   .attr('height', '50px')
-  
+
+        
+        
+      })
+
+      // ids.forEach(d=> {
+      //   document.querySelector(d).addEventListener('click', d=> {
+      //     console.log('right on surfs up')
+      //   })
+      // })
+
+     
+    }
+
+
+
+  // var svgObject = document.getElementById('svg-object').contentDocument;
+
   });

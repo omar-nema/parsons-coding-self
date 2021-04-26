@@ -1,16 +1,51 @@
-room,parentObject,childObject,coordX,coordY,sizeX,sizeY,age,time,notes
-bedroom,shelf,,0.8,0.05,0.172,0.06,,,
-bedroom,shelf,money tree plant,0.1,0.2,0.15,0.6,,,
-bedroom,shelf,monstera plant,0.45,0.2,0.15,0.6,,,
-bedroom,shelf,speaker,0.8,0.2,0.15,0.6,,,
-bedroom,illustrations,,0.08,0.05,,,,,
-bedroom,yoga mat,,,,,,,,
-bedroom,rug,,0.25,0.05,0.53,0.5,,,
-bedroom,bed,,0.25,0.58,0.4,0.4,,,
-bedroom,frames,,0.78,0.95,0.05,0.03,,,hassan hajjaj portrait photos
-bedroom,rug,book box,0.1,0.1,0.15,0.15,,,
-bedroom,rug,pouf,0.4,0.1,0.1,0.1,,,
-bedroom,rug,desk floor stand,0.5,0.4,0.3,0.2,,,
-bedroom,rug,laptop,0.3,0.3,0.1,0.1,,,
-bedroom,floor lamp,,,,,,,,
-office,,,,,,,,,
+room,id,notes
+office,officeLampFloor,4 foot tall warm paper lantern floor lamp from Amazon. 1 year old.
+office,officePrint,Small flower print
+office,officeFrame,"Big frame with phases of the moon. Off-white, blue. Bored of it."
+office,officeChairDec,Useless decorative chair. Uncomfortable b/c sloped backwards.
+office,officeHeater,Space heater <3
+office,officeCushions,Two large cushions for theoretical floor seating with theoretical friends
+office,officeRug,"Shag rug from Wayfair, 1 years old. A bit plain but I thought it would feel 'professional'."
+office,officeChairDesk,An expensive an uncomfortable gray office chair. Too big to return :(.
+office,officeDesk,Light wood desk w/ adjustable height.
+office,officeNotebook,Graph paper mostly for doodling in meetings.
+office,officeMouse,A strange looking mouse that makes me feel like a true techie.
+office,officeKeyboard,Slim gray keyboard
+office,officeLaptop,Work laptop - Dell XPS
+office,officeSpeakerL,Creative Recreation speakers. Boiler room mixes.
+office,officeSpeakerR,Creative Recreation speakers. Boiler room mixes.
+office,officeCoaster,Mini rug that functions as coaster. From Saudi.
+office,officeStand,Small wooden stand
+office,officeStandPlant,Pine plant that attracts fruit flies. Recently allowed back into the house after 1 week timeout.
+office,officeStandRobot,A cardboard robot. Gift from an ex.
+office,officeCab,Heavy wooden cabinet. Office supplies mostly.
+office,officeCabPlant,Aloe plant.
+office,officeCabBox,Bright red box storing valuables and jewelry
+office,officeCabLamp,A small table lamp
+office,officeCabPostcards,Postcards from my friend May
+office,officeCandle,Lemon scent candle
+bedroom,brFrameBed,3 small frames. Colorful portrait photography of Hassan Hajjaj.
+bedroom,brPrint,Some abstract set of shapes. Gift big that I hung up.
+bedroom,brIllustrations,"Drawings that my little siblings made. The family, castles, rocket ships."
+bedroom,brFloorLamp,4 foot tall warm paper lantern floor lamp from Amazon. 2 years old.
+bedroom,brLampHanging,Hanging warm paper lantern lamp.
+bedroom,brShelf,Wooden shelf
+bedroom,brPlant,Money tree plant. Thriving. 4 feet tall.
+bedroom,brPlant2,"Monstera plant. Healthy, growing downwards."
+bedroom,brSpeaker,"Bluetooth speaker. For working out, getting dressed."
+bedroom,brCandle,Vanilla scent candle
+bedroom,brLighter,White lighter. Text 'Pier 59 studios'.
+bedroom,brRugBook2,"Salt' by Nayyirah Waheed. Accessible, short poetry."
+bedroom,brRugBook1,The Emigrants' by WG Sebald
+bedroom,brRugBox,Blue cardboard box full of books + massage ball
+bedroom,brRugCushion,A gray cushion that is the logical place to sit when on the floor. But almost never used.
+bedroom,brFloorDesk,Wooden floor desk for laptop. Only used with 'good screen' / when watching TV.
+bedroom,brRugLaptop,Good screen'. 8 year old Macbook Pro. Purely for fun.
+bedroom,brRugCharger,Macbook charger
+bedroom,brBedBlanket1,Gray light comforter
+bedroom,brBedBlanket2,Fuzzy fleece blanket
+bedroom,brBedPillow1,Memory foam pillow (fav)
+bedroom,brBedPillow2,Very flat pillow that I thought would help fix posture but has basically become decorative.
+bedroom,brBedPillow3,8 year old pillow that needs to be replaced.
+bedroom,brRug,"Colorful, soft, thick geometric rug. Where I sit, write, etc."
+bedroom,brBed,1-year old Medium firm mattress. Wooden platform bed frame. Just used for sleeping.
