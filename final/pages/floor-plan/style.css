@@ -1,0 +1,37 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500;600&display=swap');
+
+* {
+  font-family: 'Epilogue';
+  color: #e5e5e5;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+body {
+  background: #121213; 
+}
+
+
+main {
+  max-width: 950px;
+  width: 90%;
+  margin: auto;
+  padding-top: 50px;
+}
+
+
+h1 {
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+svg.floor-plan {
+  width: 900px;
+  height: 600px;
+  border: 1px dashed #333333;
+}
+

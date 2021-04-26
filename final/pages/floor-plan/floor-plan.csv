@@ -1,0 +1,16 @@
+room,parentObject,childObject,coordX,coordY,sizeX,sizeY,age,time,notes
+bedroom,shelf,,0.8,0.05,0.172,0.06,,,
+bedroom,shelf,money tree plant,0.1,0.2,0.15,0.6,,,
+bedroom,shelf,monstera plant,0.45,0.2,0.15,0.6,,,
+bedroom,shelf,speaker,0.8,0.2,0.15,0.6,,,
+bedroom,illustrations,,0.08,0.05,,,,,
+bedroom,yoga mat,,,,,,,,
+bedroom,rug,,0.25,0.05,0.53,0.5,,,
+bedroom,bed,,0.25,0.58,0.4,0.4,,,
+bedroom,frames,,0.78,0.95,0.05,0.03,,,hassan hajjaj portrait photos
+bedroom,rug,book box,0.1,0.1,0.15,0.15,,,
+bedroom,rug,pouf,0.4,0.1,0.1,0.1,,,
+bedroom,rug,desk floor stand,0.5,0.4,0.3,0.2,,,
+bedroom,rug,laptop,0.3,0.3,0.1,0.1,,,
+bedroom,floor lamp,,,,,,,,
+office,,,,,,,,,
