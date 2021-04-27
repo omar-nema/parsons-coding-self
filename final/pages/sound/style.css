@@ -15,12 +15,12 @@ body {
 }
 
 
-main {
+/* main {
   max-width: 950px;
   width: 90%;
   margin: auto;
   padding-top: 50px;
-}
+} */
 
 
 h1 {
@@ -29,21 +29,36 @@ h1 {
   margin-bottom: 20px;
 }
 
+.page-title {
+  color: gray;
+}
 
 .room {
   fill: gray;
 }
 
-header {
+.sound-container {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 40px;
+
+
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%);
+  max-width: 70%;
+
 }
-.track-holder {
-  display: flex;
+.track-title {
+  font-weight: 500;
+}
+.track-holder div {
+  margin-bottom: 15px;
+  font-size: 24px;
+  /* display: flex;
   flex-direction: row;
   padding: 5px 0px;
-  align-items: center;
+  align-items: center; */
 }
 .nav {
   display: flex;
@@ -54,4 +69,9 @@ header {
   padding: 5px 8px;
   margin-right: 10px;
   cursor: pointer;
+}
+
+canvas {
+  margin: auto;
+  display: block;
 }

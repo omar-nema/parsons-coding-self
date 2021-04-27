@@ -2,73 +2,107 @@
 
 let fft;
 let initFft = 512;
-let currTrack;
 
-let trackList = [
-  'rooftop 2021 elaine.m4a',
-  '2020 yemeni.m4a'
-]
 let loadedTracks = [];
 let trackDirectory = './assets-audio/';
-let table;
 
-async function preload() {
-   loadTable('./audiodir.csv', 'csv', 'header')
-  console.log(table)
+let currTrack, currTrackIndex;
 
-  trackList.forEach(t => {
-    trackName = trackDirectory + t;
-    loadedTracks.push(loadSound(trackName))
-  })
 
-  currTrack = loadSound('./assets-audio/rooftop 2021 elaine.m4a');
-
-  currTrack.setLoop(false);
-
-  // document.querySelector('.btn.next').addEventListener('click', ()=>{
-  //   trackList.filter(d=> {})
-  // })
-  
-
+async function swapAudio(newTrack){
+  await currTrack.stop();
+  currTrack = newTrack;
+  fft.setInput(currTrack);
+  currTrack.play();
+  return;
 }
 
+async function setNewTrack(indexChg){
+  newTrack = loadedTracks[currTrackIndex+indexChg].audio;
+  currTrackIndex += indexChg;
+  await swapAudio(newTrack);
+  updateTrackTitle();
+}
 
+function updateTrackTitle(title){
+  document.querySelector('.track-title').innerText = loadedTracks[currTrackIndex].title;
+  document.querySelector('.track-desc').innerText = loadedTracks[currTrackIndex].notes;
+};
 
-function mousePressed() {
-  if (currTrack.isPlaying()) {
-    currTrack.stop();
+function initUIElements(){
+  document.querySelector('.btn.prev').addEventListener('click', d=> {
+    setNewTrack(-1)
+  })  
+  document.querySelector('.btn.next').addEventListener('click', d=> {
+    setNewTrack(1);
+  })
+}
+
+let scrollPos = 0;
+let scale = 0.1
+function mouseWheel(e) {
+  if (e.deltaY > 0){
+    scrollPos+=10;
+    scale+= 0.1;
+    if (scrollPos ==50){
+      scrollPos = 0;
+      setNewTrack(1);
+    }
+  
   } else {
-    currTrack.play();
+    scrollPos-=10;
   }
 }
 
 
+
+async function preload() {
+  loadTable('./audiodir.csv', 'csv', 'header' , d=>{
+    d.rows.forEach(t=> {
+      trackName = trackDirectory + t.obj.filename;
+      loadedTracks.push({
+        audio: loadSound(trackName),
+        filename: t.obj.filename,
+        title: t.obj.title,
+        notes: t.obj.notes
+      })
+
+      currTrackIndex = 0;
+      currTrack = loadedTracks[currTrackIndex].audio;
+      updateTrackTitle();
+      currTrack.setLoop(false); 
+    });
+  });
+}
+
+// function mousePressed() {
+//   if (currTrack.isPlaying()) {
+//     currTrack.stop();
+//   } else {
+//     currTrack.play();
+//   }
+// }
+
+
 function setup() {
-    createCanvas(600, 600, WEBGL);
-    userStartAudio();
-    fft = new p5.FFT(.4, initFft);
-    fft.setInput(currTrack);
-    currTrack.play();
-  console.log(table)
-}
 
-function swapAudio(){
-  currTrack.stop();
-  currTrack = currTrack2;
+  var myCanvas = createCanvas(windowWidth*.9, windowHeight*.9);
+  //   myCanvas.parent("idnameofdiv");
+  // createCanvas(600, 600, WEBGL);
+  userStartAudio();
+  fft = new p5.FFT(.4, initFft);
   fft.setInput(currTrack);
-  currTrack.play();
+  currTrack.play(); 
+  
+  initUIElements();
 }
-
 
 
 
 var scl = 5;
 
 function draw() {
-
-
-  if (currTrack.isPlaying()){
-
+  if (currTrack && currTrack.isPlaying()){
 
     //amp = amp.getLevel();
     // var bgalpha = map(amp, 0, .2, 255, 150);
