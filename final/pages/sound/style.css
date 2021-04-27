@@ -33,7 +33,7 @@ main {
   margin: auto;
   border: 1px solid gray;
   padding: 30px;
-  font-size: 24px;
+  font-size: 20px;
 
 }
 
@@ -46,22 +46,25 @@ main {
 }
 .track-details {
   position: absolute;
-  top:0 ;
-  left: 0;
-  width: 100%;
-  padding: 20px;
+  top: 50%;
+  left: 10%;
+  width: 80%;
+  transform: translate(0, -50%);
 }
-
+.track-title {
+  font-weight: 500;
+  margin-bottom: 20px;
+}
 
 
 .nav {
   display: flex;
-  margin-right: 20px;
+  justify-content: space-between;
 }
 .nav .btn {
   border: 1px solid white;
   padding: 5px 8px;
-  margin-right: 10px;
+ 
   cursor: pointer;
 }
 

@@ -103,7 +103,7 @@ let sketch = function(p) {
           p.noStroke();
 
           let currBand = rectNum % bands.length;
-          p.fill(spectrum[rectNum])
+          p.fill(p.map(spectrum[rectNum], 0, 150, 30, 60))
           //console.log(band)
           p.rect(x*unitW, y*unitH, unitW, unitH);
           rectNum ++;
