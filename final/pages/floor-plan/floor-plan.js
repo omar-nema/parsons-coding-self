@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             el.addEventListener('mouseover', e=>{
               tooltip.innerHTML = `<div>${d.notes}</div>`
-              tooltip.style.top = e.clientY + 20 +  'px';
+              tooltip.style.top = e.clientY + 30 +  'px';
               tooltip.style.left = e.clientX + 10 + 'px';
               tooltip.className = 'tooltip';
               e.stopPropagation();
