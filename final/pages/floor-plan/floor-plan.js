@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
   
-  fetch('./combinedRooms.svg')
+  fetch('./svg/combinedRooms.svg')
     .then(r => r.text())
     .then(text => {
         document.querySelector('.floor-plan').innerHTML = text;

@@ -1,0 +1,36 @@
+@import '../../global-assets/styleBase.scss';
+
+
+
+body {
+    font-size: 14px;
+}
+  
+.entry-text {
+    background: #595959;
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    padding: 5px 15px;
+    /* text-align: center; */
+    /* align-items: center; */
+    display: flex;
+}
+
+.entry {
+    margin-bottom: 100px;
+}
+
+.floating-text {
+    position: fixed;
+    background: #000000b5;
+    padding: 10px 20px;
+    max-width: 50%;
+}
+
+.entry-date {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+

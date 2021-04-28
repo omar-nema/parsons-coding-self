@@ -1,0 +1,117 @@
+document.addEventListener("DOMContentLoaded", async function() {
+
+    let data = await d3.csv('./journal-abstraction.csv', d=> d);
+    let floatingData = await d3.csv('./rawfragments.csv', d=> d);
+    console.log(data, floatingData);
+
+    function getGroupElement(groupNum){
+        let filtered = data.filter(d=> parseInt(d.group) == groupNum);
+        return filtered[Math.floor(Math.random() * filtered.length)];
+    }
+    
+    function createEntry(date){
+        let group0Elements = 0;
+        let group1Elements = parseInt(Math.random()*10)
+        let group3Elements = 1;
+
+        let entryStart = `<div class="entry"><div class='entry-date'>${date}</div>`
+        let entryText = '';
+        for (var i=0; i<group1Elements; i++){
+            el = getGroupElement(1);
+            let elText = '';
+            for (var j=0; j<el.heightfactor*3; j++){
+                elText += el.trend + '. ';
+            }
+            entryText += `<div class="entry-text">${elText}</div>`
+        }
+        let entryEnd = '</div>';
+
+        return `${entryStart}${entryText}${entryEnd}` 
+    }
+
+
+    let weekVal = -4;
+    let numEntries = 30;
+    let startDate = '01-01';
+    for (var i=0; i<numEntries; i++){
+        let date;
+        if (weekVal < 0){
+            date = `${Math.abs(weekVal)}  weeks ago`;
+        } else if (weekVal ==0){
+            date = `this week`;
+        } else {
+            date = `In ${Math.abs(weekVal)} weeks`;
+        }
+        let entry = createEntry(date);
+        d3.select('main').append('div').html(entry);
+        weekVal ++;
+    }
+
+
+    
+    
+    // let windowCenter = {x: window.innerWidth/2, y: window.innerHeight/2};
+    let floatingDivs = [];
+    function createFloatingDiv(txt){
+        d3.select('main').append('div').attr('class', 'floating-text')
+            .text(txt)
+            .style('left', `${parseInt(-50 - Math.random()*300)}px`)
+            .style('top', `${parseInt(-50 - Math.random()*300)}px`)
+    };
+    function initDivs(){
+        floatingData.forEach(d=> {
+            createFloatingDiv(d.fragment);
+        })
+    };
+    initDivs();
+    d3.selectAll('.floating-text').each(function(d) {
+        let div = d3.select(this);
+        let pos = div.node().getBoundingClientRect();
+        let divObj = {
+            div: div,
+            top: 0,
+            left: 0,        
+            center: {
+                x: parseInt(window.innerWidth - pos.width),
+                y: parseInt(window.innerHeight - pos.height)
+            },
+        };
+        floatingDivs.push(divObj);
+    });
+    function moveDivToCenter(divObj){
+        let sel = divObj.div;
+
+        sel.transition().duration(800)
+            .style('top', `${parseInt(Math.random()*divObj.center.y)}px`)
+            .style('left', `${parseInt(Math.random()*divObj.center.x)}px`)
+            .on('end', d=> {
+                setTimeout(()=>{
+                    sel.transition().duration(300).style('opacity', '0').on('end', e=> {
+                        sel.style('left', `${parseInt(-50 - Math.random()*300)}px`)
+                        .style('top', `${parseInt(-50 - Math.random()*300)}px`)
+                        .style('opacity', 1)
+                    });
+
+                }, 1500)
+             
+            });
+    };
+    function getRandomFloatingDiv(){
+        return floatingDivs[Math.floor(Math.random() * floatingDivs.length)];
+    }
+
+    let scrollCap = 5;
+    let currScroll = 0;
+    window.onscroll = function(e) {
+
+        if (currScroll == scrollCap){
+            moveDivToCenter(getRandomFloatingDiv());
+            scrollCap = 9 + parseInt(20*Math.random());
+            currScroll = 0;
+        }
+        // console.log(currScroll)
+        currScroll++;
+      }
+
+  
+});
