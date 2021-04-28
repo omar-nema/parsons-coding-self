@@ -1,0 +1,90 @@
+@import '../../global-assets/styleBase.scss';
+
+* {
+    box-sizing: border-box;
+}
+.cards {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+.card {
+    height: auto;
+    flex-basis: 40%;
+    background: #686262;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+}
+.line {
+    height: 2px;
+    width: 50px;
+    background: gray;
+    -ms-flex-preferred-size: 10%;
+    flex-basis: 10%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.card-header {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 25px;
+}
+.card-body {
+    padding-bottom: 20px;
+    min-height: 100px;
+}
+.card.result .card-body {
+    background: #4f4b4b;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fill;
+    font-size: 30px;
+}
+.card-footer {
+    background: #8D8989;
+    width: 100%;
+    padding: 10px 5px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.noUi-connect {
+    background: #3a3b3b;
+}
+.noUi-target {
+    border: none;
+    box-shadow: none;
+    background: #999797;
+}
+.noUi-handle {
+    box-shadow: none;
+    border: 1px solid #5c5d5d;
+    background: #3a3b3b;
+}
+
+.slider-group {
+    margin-bottom: 20px;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+}
+.slider-label {
+    flex-basis: 40%;
+}
+.slider {
+    display: flex;
+    flex-basis: 60%;
+}
+
+.btn-submit{
+    cursor: pointer;
+}
+.btn-submit:hover {
+    filter: brightness(90%);
+}
