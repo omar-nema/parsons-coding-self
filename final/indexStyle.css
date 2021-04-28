@@ -23,4 +23,71 @@ h1 {
   font-weight: 400;
   margin-bottom: 50px;
 }
+
+body {
+  overflow: hidden;
+}
+
+.card-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.card {
+  -ms-flex-preferred-size: 20%;
+      flex-basis: 20%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 24px;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-transition: -webkit-filter .1s linear, -webkit-text-decoration .1s linear;
+  transition: -webkit-filter .1s linear, -webkit-text-decoration .1s linear;
+  transition: filter .1s linear, text-decoration .1s linear;
+  transition: filter .1s linear, text-decoration .1s linear, -webkit-filter .1s linear, -webkit-text-decoration .1s linear;
+  color: white;
+  text-decoration: none;
+}
+
+.card:hover {
+  -webkit-filter: brightness(85%);
+          filter: brightness(85%);
+  text-decoration: underline;
+  -webkit-text-decoration-color: gray;
+          text-decoration-color: gray;
+}
+
+.space {
+  background: #282828;
+}
+
+.thinking {
+  background: #323232;
+}
+
+.memory {
+  background: #3c3c3c;
+}
+
+.doing {
+  background: #464646;
+}
+
+.feeling {
+  background: #505050;
+}
 /*# sourceMappingURL=indexStyle.css.map */

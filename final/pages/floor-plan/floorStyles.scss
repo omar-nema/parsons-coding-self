@@ -1,16 +1,7 @@
-/* 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap'); */
+@import '../../global-assets/styleBase.scss';
 
-@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@200;300;400;500;600&family=Space+Grotesk:wght@300;400;500;600&display=swap');
-
-* {
-  font-family: 'Space Grotesk';
-  color: #e5e5e5;
-  font-weight: 300;
-}
 
 body {
-  background: black; 
   font-size: 14px;
 }
 
@@ -18,17 +9,12 @@ body {
 main {
   max-width: 1100px;
   width: 90%;
-  margin: auto;
   padding-top: 50px;
 }
 
 
-h1 {
-  font-size: 28px;
-  font-weight: 400;
-  margin-bottom: 50px;
-  text-decoration: underline;
-}
+
+
 
 .floor-plan {
   width: 100%;
@@ -45,7 +31,7 @@ h1 {
   position: absolute;
   color: white;
   background: black;
-  box-shadow: 0 1px 2px 3px rgb(0 0 0 / 10%);
+//   box-shadow: 0 1px 2px 3px rgb(0 0 0 / 10%);
   font-size: 12px;
   font-weight: 400;
   padding: 10px 20px;
