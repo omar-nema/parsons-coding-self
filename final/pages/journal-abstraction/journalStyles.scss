@@ -3,20 +3,24 @@
 body {
     font-size: 14px;
 }
-  
+
+main {
+    max-width: 850px;
+}
+
+
+
 .entry-text {
-    background: #595959;
     width: 100%;
     height: auto;
     margin-top: 20px;
-    padding: 5px 15px;
-    /* text-align: center; */
-    /* align-items: center; */
     display: flex;
 }
 
 .entry {
     margin-bottom: 100px;
+    background: #595959;
+    padding: 15px;
 }
 
 .floating-text {
@@ -29,6 +33,9 @@ body {
 .entry-date {
     font-size: 18px;
     font-weight: 500;
+    color: white;
+    text-decoration: underline;
+    text-decoration-color: gray;
 }
 
 .back-btn {

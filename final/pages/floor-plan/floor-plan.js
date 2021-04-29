@@ -25,20 +25,21 @@ document.addEventListener("DOMContentLoaded", function() {
        
             el.addEventListener('click', e => {
               console.log(d.id)
+              
               e.stopPropagation();
             });
             el.addEventListener('mouseover', e=>{
               tooltip.innerHTML = `<div>${d.notes}</div>`
-              tooltip.style.top = e.clientY + 30 +  'px';
-              tooltip.style.left = e.clientX + 10 + 'px';
+              tooltip.style.top = e.pageY + 30 +  'px';
+              tooltip.style.left = e.pageX + 10 + 'px';
               tooltip.className = 'tooltip';
+              d3.select('#'+d.id).style('filter', 'contrast(0.7)');
               e.stopPropagation();
             });
             
             el.addEventListener('mouseout', e=>{
-              tooltip.innerHTML = '';
               tooltip.className = 'tooltip hidden';
-    
+              d3.select('#'+d.id).style('filter', 'inherit');
             })
             
             // .addEventListener('mouseout', e=>{

@@ -8,30 +8,33 @@ document.addEventListener("DOMContentLoaded", async function() {
         let filtered = data.filter(d=> parseInt(d.group) == groupNum);
         return filtered[Math.floor(Math.random() * filtered.length)];
     }
+
+    function createGroupText(groupNum){
+        el = getGroupElement(groupNum);
+        let elText = '';
+        for (var j=0; j<el.heightfactor*3; j++){
+            elText += el.trend + '. ';
+        }
+        return `<div class="entry-text">${elText}</div>`;
+    }
     
     function createEntry(date){
-        let group0Elements = 0;
-        let group1Elements = parseInt(Math.random()*10)
-        let group3Elements = 1;
-
+        let groupStructure = [[0, 1], [1, parseInt(Math.random()*10)], [2, 1]];
         let entryStart = `<div class="entry"><div class='entry-date'>${date}</div>`
         let entryText = '';
-        for (var i=0; i<group1Elements; i++){
-            el = getGroupElement(1);
-            let elText = '';
-            for (var j=0; j<el.heightfactor*3; j++){
-                elText += el.trend + '. ';
-            }
-            entryText += `<div class="entry-text">${elText}</div>`
-        }
+        groupStructure.forEach(d=> {
+            let groupNum = d[0];
+            for (let j=0; j<d[1]; j++){
+                entryText += createGroupText(groupNum);
+            };
+        })
         let entryEnd = '</div>';
-
         return `${entryStart}${entryText}${entryEnd}` 
     }
 
 
-    let weekVal = -4;
-    let numEntries = 30;
+    let weekVal = -12;
+    let numEntries = 24;
     let startDate = '01-01';
     for (var i=0; i<numEntries; i++){
         let date;
@@ -55,8 +58,8 @@ document.addEventListener("DOMContentLoaded", async function() {
     function createFloatingDiv(txt){
         d3.select('main').append('div').attr('class', 'floating-text')
             .text(txt)
-            .style('left', `${parseInt(-50 - Math.random()*300)}px`)
-            .style('top', `${parseInt(-50 - Math.random()*300)}px`)
+            .style('left', `${parseInt(-100 - Math.random()*300)}px`)
+            .style('top', `${parseInt(-100 - Math.random()*300)}px`)
     };
     function initDivs(){
         floatingData.forEach(d=> {

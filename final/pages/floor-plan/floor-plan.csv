@@ -1,44 +1,45 @@
 room,id,notes
 office,officeLampFloor,4 foot tall warm paper lantern floor lamp from Amazon. 1 year old.
-office,officePrint,Small flower print
+office,officePrint,Small flower print. Cute.
 office,officeFrame,"Big frame with phases of the moon. Off-white, blue. Bored of it."
 office,officeChairDec,Useless decorative chair. Uncomfortable b/c sloped backwards.
 office,officeHeater,Space heater <3
 office,officeCushions,Two large cushions for theoretical floor seating with theoretical friends
 office,officeRug,"Shag rug from Wayfair, 1 years old. A bit plain but I thought it would feel 'professional'."
 office,officeChairDesk,An expensive an uncomfortable gray office chair. Too big to return :(.
-office,officeDesk,Light wood desk w/ adjustable height.
+office,officeDesk,Light wood desk w/ adjustable height. Very heavy.
 office,officeNotebook,Graph paper mostly for doodling in meetings.
 office,officeMouse,A strange looking mouse that makes me feel like a true techie.
-office,officeKeyboard,Slim gray keyboard
+office,officeKeyboard,Slim gray Apply keyboard
 office,officeLaptop,Work laptop - Dell XPS
-office,officeSpeakerL,Creative Recreation speakers. Boiler room mixes.
-office,officeSpeakerR,Creative Recreation speakers. Boiler room mixes.
+office,officeSpeakerL,Creative Recreation speakers. To play mixes when working.
+office,officeSpeakerR,Creative Recreation speakers. To play mixes when working.
 office,officeCoaster,Mini rug that functions as coaster. From Saudi.
 office,officeStand,Small wooden stand
-office,officeStandPlant,Pine plant that attracts fruit flies. Recently allowed back into the house after 1 week timeout.
-office,officeStandRobot,A cardboard robot. Gift from an ex.
-office,officeCab,Heavy wooden cabinet. Office supplies mostly.
-office,officeCabPlant,Aloe plant.
+office,officeStandPlant,Pine plant that attracts fruit flies. Recently allowed back into the house after 1 week time out.
+office,officeStandRobot,A cardboard robot. Gift from a friend.
+office,officeCab,"Small, heavy wooden cabinet. Office supplies mostly."
+office,officeCabPlant,"Aloe plant. Healthy, low maintenance."
 office,officeCabBox,Bright red box storing valuables and jewelry
-office,officeCabLamp,A small table lamp
+office,officeCabLamp,"A small table lamp. Clear glass stand, warm lighting."
 office,officeCabPostcards,Postcards from my friend May
+office,officeMonitor,"24"" dell monitor. Has my attention 12+ hours per day."
 office,officeCandle,Lemon scent candle
 bedroom,brFrameBed,3 small frames. Colorful portrait photography of Hassan Hajjaj.
 bedroom,brPrint,Some abstract set of shapes. Gift big that I hung up.
 bedroom,brIllustrations,"Drawings that my little siblings made. The family, castles, rocket ships."
 bedroom,brFloorLamp,4 foot tall warm paper lantern floor lamp from Amazon. 2 years old.
 bedroom,brLampHanging,Hanging warm paper lantern lamp.
-bedroom,brShelf,Wooden shelf
-bedroom,brPlant,Money tree plant. Thriving. 4 feet tall.
+bedroom,brShelf,Wooden shelf from Ikea
+bedroom,brPlant,"Money tree plant. Thriving. 4 feet tall, won't stop growing."
 bedroom,brPlant2,"Monstera plant. Healthy, growing downwards."
 bedroom,brSpeaker,"Bluetooth speaker. For working out, getting dressed."
 bedroom,brCandle,Vanilla scent candle
-bedroom,brLighter,White lighter. Text 'Pier 59 studios'.
+bedroom,brLighter,White lighter. Imprinted with 'Pier 59 studios' (not sure how I got it).
 bedroom,brRugBook2,"Salt' by Nayyirah Waheed. Accessible, short poetry."
-bedroom,brRugBook1,The Emigrants' by WG Sebald
+bedroom,brRugBook1,"The Emigrants' by WG Sebald. Dense, read like 1 chapter and leaving it on the floor to someday call me back."
 bedroom,brRugBox,Blue cardboard box full of books + massage ball
-bedroom,brRugCushion,A gray cushion that is the logical place to sit when on the floor. But almost never used.
+bedroom,brRugCushion,"A gray cushion that is the logical place to sit when on the floor. But almost never used, just sit on the floor instead."
 bedroom,brFloorDesk,Wooden floor desk for laptop. Only used with 'good screen' / when watching TV.
 bedroom,brRugLaptop,Good screen'. 8 year old Macbook Pro. Purely for fun.
 bedroom,brRugCharger,Macbook charger
@@ -52,10 +53,10 @@ bedroom,brBed,1-year old Medium firm mattress. Wooden platform bed frame. Just u
 closet,closetChair,An uncomfortable stool that used to be my desk chair. ~360 degrees of rotation~.
 closet,closetBag,Small black Fjallraven backpack. Very dirty.
 closet,closetLaundry,Laundry hamper.
-closet,closetBoxMisc,Things
+closet,closetBoxMisc,"sunscreen, headphones, melatonin, turmeric, eye supplements, travel size deo, eye supplements, coconut oil, old mail, charging cables, lens cleaner, eye drops, painkillers, face masks"
 closet,closetBoxEss,"Open box for daily essentials. Wallet, keys, earrings, deo (old spice), vaseline, sunscreen, lotion, face masks, lighter, brush, sunglasses, differin gel, eye cream, old cards i don't use"
 closet,closetIron,Iron that I use like once a year
-closet,closetBall,Basketball that gets good use.
+closet,closetBall,"Basketball that gets good use. Have to pump everytime though, has a hole."
 closet,closetShelving,"Shelves with: towels, old boxes, a toaster oven."
 closet,closetRack,Lots of hanging clothes. Mostly plain (lots of Uniqlo).
 closet,closetBike,"Blue hybrid bike. Bought during the pandemic, haven't used much."
@@ -69,3 +70,4 @@ closet,closetBoxDoc,Paperwork I probably don't need but seems important.
 closet,clothesBoxRoomie,Not sure what's in here.
 closet,closetShoes,"3 pairs in rotation. White Reebok, Black Adidas, Black Jordans."
 closet,closetBoxDec,Little trinkets and decorations. 
+closet,closetBoxClothes,"Winter, hiking, formal and weird clothing I don't wear often."

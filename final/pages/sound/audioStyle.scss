@@ -1,15 +1,15 @@
 @import '../../global-assets/styleBase.scss';
 
 
-main {
-    height: 95vh;
-    width: 95vw;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+// main {
+//     height: 95vh;
+//     width: 95vw;
+//     margin: 0;
+//     padding: 0;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//   }
   
   
   
@@ -26,7 +26,7 @@ main {
   .track-tv {
     width: 100%;
     height: 300px;
-    border: 1px solid gray;
+    border: 1px solid #414141;
     position: relative;;
     margin-top: 20px;
   }

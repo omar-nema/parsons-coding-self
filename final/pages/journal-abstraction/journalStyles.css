@@ -39,7 +39,6 @@ h1 {
 .back-btn {
   color: white;
   font-size: 18px;
-  border: 1px solid white;
   text-decoration: none;
   padding: 5px 10px;
   background: #414040;
@@ -59,14 +58,14 @@ body {
   font-size: 14px;
 }
 
+main {
+  max-width: 850px;
+}
+
 .entry-text {
-  background: #595959;
   width: 100%;
   height: auto;
   margin-top: 20px;
-  padding: 5px 15px;
-  /* text-align: center; */
-  /* align-items: center; */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -74,6 +73,8 @@ body {
 
 .entry {
   margin-bottom: 100px;
+  background: #595959;
+  padding: 15px;
 }
 
 .floating-text {
@@ -86,6 +87,10 @@ body {
 .entry-date {
   font-size: 18px;
   font-weight: 500;
+  color: white;
+  text-decoration: underline;
+  -webkit-text-decoration-color: gray;
+          text-decoration-color: gray;
 }
 
 .back-btn {
