@@ -58,4 +58,12 @@ h1 {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
+
+img {
+  max-width: 800px;
+  display: block;
+  margin: auto;
+  margin-top: 150px;
+  max-height: 700px;
+}
 /*# sourceMappingURL=seeStyles.css.map */
