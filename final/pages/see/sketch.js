@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", async function() {
     let emotions = data.columns.filter(d=> d != 'activity');
     let vecLength = emotions.length;
 
+
+    ///test
     let sampleVec = [1,0,1,0,0];
     emotions.forEach(d=> {sampleVec.push(Math.random())});
  
@@ -24,6 +26,9 @@ document.addEventListener("DOMContentLoaded", async function() {
         }
         return Math.sqrt(totalD);
     };
+
+    console.log(emotions)
+
     function getMostSimilarActivity(moodVec){
         let minDist = 10000;
         let minIndex= 5000;
@@ -36,6 +41,11 @@ document.addEventListener("DOMContentLoaded", async function() {
         })
         return data[minIndex].activity;
     }
+
+    // let minIndex = getMostSimilarActivity(sampleVec);
+    // let minActivity = data[minIndex].activity;
+    // console.log(minIndex, minActivity);
+
     sliders = [];
     slideGrps =d3.select('.card.params').select('.card-body').selectAll('.slider-group').data(emotions).join('div').attr('class', 'slider-group');
     slideGrps.append('div').attr('class', 'slider-label').text(d=> d);
@@ -61,5 +71,18 @@ document.addEventListener("DOMContentLoaded", async function() {
         d3.select('#result').text(getMostSimilarActivity(currVec))
         console.log(currVec);
      
-    })  
+    })
+
+    // newSlider = d3.select('.card-body').append('div').node();
+    // console.log(newSlider)
+    // var startSlider = document.getElementById('range');
+
+ 
+
+    // console.log(startSlider.noUiSlider.get());
+    // console.log(calcSimilarity(vec1, vec2));
+    // console.log(calcSimilarity(vec2, vec3));
+    // console.log(calcSimilarity(vec2, vec4));
+    // console.log(calcSimilarity(vec2, vec2));
+  
 });

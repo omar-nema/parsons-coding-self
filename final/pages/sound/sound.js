@@ -122,8 +122,28 @@ let sketch = function(p) {
 
 
 
-let node = document.createElement('div');
-new p5(sketch, 'p5canvas');
+let sketchNoise = function(p) {
+
+  p.preload =  function(){
+  
+  }
+
+  p.setup = function(){
+    console.log('i rock')
+  }
+
+
+  p.draw = function(){
+      
+  }
+
+  
+
+};
+
+
+// let node = document.createElement('div');
+// new p5(sketch, 'p5canvas');
 
 
 
