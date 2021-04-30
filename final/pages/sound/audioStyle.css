@@ -70,7 +70,7 @@ body {
 .audio-trigger {
   position: fixed;
   z-index: 100;
-  background: #df4bb566;
+  background: #db4cb34f;
   -webkit-filter: blur(25px);
           filter: blur(25px);
   cursor: pointer;
