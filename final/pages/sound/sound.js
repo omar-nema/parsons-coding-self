@@ -1,332 +1,112 @@
 
-
-
-let sketch = function(p) {
-
-  let fft;
-  let initFft = 512;
-  let loadedTracks = [];
-  let trackDirectory = './assets-audio/';
-  let currTrack, currTrackIndex;
-
-  function updateTrackTitle(title){
-    document.querySelector('.track-title').innerText = loadedTracks[currTrackIndex].title;
-    document.querySelector('.track-desc').innerText = loadedTracks[currTrackIndex].notes;
-  };
-  async function setNewTrack(indexChg){
-    newTrack = loadedTracks[currTrackIndex+indexChg].audio;
-    currTrackIndex += indexChg;
-    await swapAudio(newTrack);
-    updateTrackTitle();
-  }
-  function updateTrackTitle(title){
-    document.querySelector('.track-title').innerText = loadedTracks[currTrackIndex].title;
-    document.querySelector('.track-desc').innerText = loadedTracks[currTrackIndex].notes;
-  };
-  function initUIElements(){
-    document.querySelector('.btn.prev').addEventListener('click', d=> {
-      setNewTrack(-1)
-    })  
-    document.querySelector('.btn.next').addEventListener('click', d=> {
-      setNewTrack(1);
-    })
-  }
-  async function swapAudio(newTrack){
-    await currTrack.stop();
-    currTrack = newTrack;
-    fft.setInput(currTrack);
-    currTrack.play();
-    return;
-  }
-
-  p.preload = async function(){
-    p.loadTable('./audiodir.csv', 'csv', 'header' , d=>{
-      d.rows.forEach(t=> {
-        trackName = trackDirectory + t.obj.filename;
-        loadedTracks.push({
-          audio: p.loadSound(trackName),
-          filename: t.obj.filename,
-          title: t.obj.title,
-          notes: t.obj.notes
-        })
-
-        currTrackIndex = 0;
-        currTrack = loadedTracks[currTrackIndex].audio;
-        updateTrackTitle();
-        currTrack.setLoop(false); 
-      });
-    });
-
-  }
-
-  p.setup = function(){
-    bbox = document.querySelector('#p5canvas').getBoundingClientRect();
-    p.createCanvas(bbox.width, bbox.height);
-    p.background(0);
-    p.userStartAudio();
-    fft = new p5.FFT(.4, initFft);
-    fft.setInput(currTrack);
-    currTrack.play(); 
-    initUIElements();
-  }
-
-
-  p.draw = function(){
-      
-    if (currTrack && currTrack.isPlaying()){
-
-      let spectrum = fft.analyze();
-      let wave = fft.waveform();
-      // let rMin = width/70;
-      // let rMax = width*.35;
-      // var currR = 0;
-      var bands = fft.getOctaveBands();
-      let bandVals = [];
-
-
-      //frequency bands by radius, transparency by presence
-      // for (var i=0; i<bands.length; i++){
-      //   ctr = bands[i].ctr;
-      //   n = fft.getEnergy(bands[i].lo, bands[i].hi);
-      //   n = p.map(n, 0, 130, 0, 30);
-      //   bandVals.push(n)
-      // }
-
-      const numRows = 20;
-      const numCols = 20;
-      const unitW = p.width/numCols;
-      const unitH = p.height/numRows;
-      let rectNum = 0;
-      for (y=0; y<numRows; y++){
-        for (x=0; x<numCols; x++){
-
-          p.noStroke();
-
-          let currBand = rectNum % bands.length;
-          p.fill(p.map(spectrum[rectNum], 0, 150, 30, 60))
-          //console.log(band)
-          p.rect(x*unitW, y*unitH, unitW, unitH);
-          rectNum ++;
-        }
-      }
-
-
-
-    }
-  }
-
-  
-
-};
-
-
-
-
-let sketchNoise = function(p) {
-
-  p.preload =  function(){
-  
-  }
-
-  p.setup = function(){
-    console.log('i rock')
-  }
-
-
-  p.draw = function(){
-      
-  }
-
-  
-
-};
-
-
-// let node = document.createElement('div');
-// new p5(sketch, 'p5canvas');
-
-
-
-
-
-
-// let fft;
-// let initFft = 512;
-
-// let loadedTracks = [];
-// let trackDirectory = './assets-audio/';
-
-// let currTrack, currTrackIndex;
-
-
-// async function swapAudio(newTrack){
-//   await currTrack.stop();
-//   currTrack = newTrack;
-//   fft.setInput(currTrack);
-//   currTrack.play();
-//   return;
-// }
-
-// async function setNewTrack(indexChg){
-//   newTrack = loadedTracks[currTrackIndex+indexChg].audio;
-//   currTrackIndex += indexChg;
-//   await swapAudio(newTrack);
-//   updateTrackTitle();
-// }
-
-// function updateTrackTitle(title){
-//   document.querySelector('.track-title').innerText = loadedTracks[currTrackIndex].title;
-//   document.querySelector('.track-desc').innerText = loadedTracks[currTrackIndex].notes;
-// };
-
-// function initUIElements(){
-//   document.querySelector('.btn.prev').addEventListener('click', d=> {
-//     setNewTrack(-1)
-//   })  
-//   document.querySelector('.btn.next').addEventListener('click', d=> {
-//     setNewTrack(1);
-//   })
-// }
-
-// let scrollPos = 0;
-// let scale = 0.1
-// function mouseWheel(e) {
-//   if (e.deltaY > 0){
-//     scrollPos+=10;
-//     scale+= 0.1;
-//     if (scrollPos ==50){
-//       scrollPos = 0;
-//       setNewTrack(1);
-//     }
-  
-//   } else {
-//     scrollPos-=10;
-//   }
-// }
-
-
-
-// async function preload() {
-//   loadTable('./audiodir.csv', 'csv', 'header' , d=>{
-//     d.rows.forEach(t=> {
-//       trackName = trackDirectory + t.obj.filename;
-//       loadedTracks.push({
-//         audio: loadSound(trackName),
-//         filename: t.obj.filename,
-//         title: t.obj.title,
-//         notes: t.obj.notes
-//       })
-
-//       currTrackIndex = 0;
-//       currTrack = loadedTracks[currTrackIndex].audio;
-//       updateTrackTitle();
-//       currTrack.setLoop(false); 
-//     });
-//   });
-// }
-
-
-// function setup() {
-
-//   var myCanvas = createCanvas(400, 400);
-//   userStartAudio();
-//   fft = new p5.FFT(.4, initFft);
-//   fft.setInput(currTrack);
-//   currTrack.play(); 
-  
-//   initUIElements();
-// }
-
-
-
-
-
-// var scl = 5;
-
-// function draw() {
-
-//   // orbitControl();
-//   // rotateX(PI/3)
-//   background(0);
-
-  
-
-//   noLoop();
-
-
-
-//   if (currTrack && currTrack.isPlaying()){
-
-//     //amp = amp.getLevel();
-//     // var bgalpha = map(amp, 0, .2, 255, 150);
-//     // bgcol.setAlpha(bgalpha);
-
-//     let spectrum = fft.analyze();
-//     let wave = fft.waveform();
-//     let rMin = width/70;
-//     let rMax = width*.35;
-//     var bands = fft.getOctaveBands();
-//     var currR = 0;
+document.addEventListener("DOMContentLoaded", async function(){
  
-//     let bandVals = [];
+  let sketchNoise = function(p) {
+
+    let numRows = 80;
+    let numCols = 80;
+    let unitH, unitW;
+
+    let w = 5, h = 5;
+    let noiseMult = 200;
+
+    let pointArr = [];
+
+    p.setup = function(){
+      bbox = document.querySelector('#fullCanvas').getBoundingClientRect();
+      p.createCanvas(bbox.width, bbox.height);
+      unitH = p.height/numRows;
+      unitW = p.width/numCols;
+      p.angleMode(p.DEGREES);
+      let numPts = 0;
+      for (let y=0; y<numRows;y++){
+        let row = [];
+        for (let x=0; x<numCols; x++){
+          numPts ++;
+          let xOff = p.random(-100, 100);
+          let yOff = p.random(-100, 100);
+          row.push({
+            x: xOff + x*unitW,
+            y: yOff + y*unitH,
+            index: numPts
+          });
+        }
+        pointArr.push(row);
+      }
+    }
 
 
-//     //frequency bands by radius, transparency by presence
-//     for (var i=0; i<bands.length; i++){
-//       ctr = bands[i].ctr;
+    p.draw = function(){
+        p.background(0);
+        p.noStroke();
+        for (let y=0; y<numRows;y++){
+          for (let x=0; x<numCols; x++){  
+            let col = p.map(p.noise(x*.02, y*.02, p.frameCount*.009), 0, 1, 0, 255);
+            p.fill(col);
+            p.stroke(col);
+            p.rect(x*unitW, y*unitH, unitW, unitH);
+          }
+        };
+    }
 
-//       n = fft.getEnergy(bands[i].lo, bands[i].hi);
-//       n = map(n, 0, 130, 0, 30);
-//       bandVals.push(n)
+    
 
-//       // if (n){
-//       //   currR += width/70
-//       //   var r = map(min(ctr, 5000), 0, 5000, rMin, rMax);
-//       //   var col = color('white');
-//       //   col.setAlpha(n);
-        
-//       //   stroke(col);
-//       //   strokeWeight(.5);
+  };
 
-//       //   noFill();
-//       //   //sphere(r)
-//       // }
-//     }
+  let audioDir = await d3.csv("./audiodir.csv").then(d => d);
+  audioDir.forEach(file => {
+    let audio = new Audio('./assets-audio/' +file.filename);
+    createDiv(audio, file.title, file.notes);
+  });
 
-//     let numRows = 20;
-//     let numCols = 20;
+
+  let globalAudio =new Audio('./audiosample.m4a');
+  document.addEventListener('click', ()=> {
+    globalAudio.play();
+  })
+
+  let tooltip = document.querySelector('#audio-tooltip');
+  function showTooltip(e, title, notes){
   
-//     let unitW = width/numCols;
-//     let unitH = height/numRows;
+    tooltip.innerHTML = `<div><strong>${title}</strong><br><br>${notes}</div>`
+    tooltip.style.top = e.pageY + 30 +  'px';
+    tooltip.style.left = e.pageX + 10 + 'px';
+    tooltip.className = '';
+  }
+
+  function hideTooltip(){
+    tooltip.className = 'hidden'
+  }
+
+  function createDiv(audio, title, notes){
+    let audioDiv = document.createElement('div');
+    audioDiv.className = 'audio-trigger';
+
+    let styleString = `width: 50px; height: 50px; top: ${5+parseInt(90*Math.random())}%; left: ${5+parseInt(90*Math.random())}%`
+    audioDiv.setAttribute('style', styleString);
+
+    audioDiv.addEventListener('mouseover', (e)=> {
+      showTooltip(e, title, notes);
+      globalAudio.pause();
+      audio.play();
+
+    });
+    audioDiv.addEventListener('mouseout', ()=> {
+      audio.pause();
+      globalAudio.play();
+      hideTooltip();
+    });
+    document.querySelector('body').appendChild(audioDiv);
+  };
+
+let node = document.createElement('div');
+new p5(sketchNoise, 'fullCanvas');
   
-//     let rectNum = 0;
-//     for (y=0; y<numRows; y++){
-//       for (x=0; x<numCols; x++){
-
-//         noStroke();
-        
-//         let currBand = rectNum % bands.length;
-//         fill(spectrum[rectNum])
-//         //console.log(band)
-//         rect(x*unitW, y*unitH, unitW, unitH);
-//         rectNum ++;
-//       }
-//     }
-
-
-
-
-//   }
+});
 
 
 
 
 
-  
-// }
 
-// function keyPressed() {
-//     if (key == "a") {
-//       save(frameCount + ".png");
-//     }
-// }
+
