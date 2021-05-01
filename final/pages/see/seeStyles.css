@@ -66,4 +66,14 @@ img {
   margin-top: 150px;
   max-height: 700px;
 }
+
+.back-btn {
+  position: fixed;
+  top: 50px;
+  right: 50px;
+}
+
+main {
+  margin-bottom: 150px;
+}
 /*# sourceMappingURL=seeStyles.css.map */
