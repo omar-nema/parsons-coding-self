@@ -72,7 +72,8 @@ h1 {
 }
 
 body {
-  overflow: hidden;
+  overflow: auto;
+  height: 100vh;
 }
 
 .card-container {
@@ -180,5 +181,12 @@ body {
 .info-overlay .info {
   max-width: 50%;
   font-size: 24px;
+}
+
+@media (max-width: 700px) {
+  .info-overlay .info {
+    font-size: 18px;
+    max-width: 80%;
+  }
 }
 /*# sourceMappingURL=indexStyle.css.map */
