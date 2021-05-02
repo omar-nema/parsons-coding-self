@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", async function() {
     function moveDivToCenter(divObj){
         let sel = divObj.div;
 
-        sel.transition().duration(800)
+        sel.transition().duration(1500)
             .style('top', `${parseInt(Math.random()*divObj.center.y)}px`)
             .style('left', `${parseInt(Math.random()*divObj.center.x)}px`)
             .on('end', d=> {
@@ -105,15 +105,16 @@ document.addEventListener("DOMContentLoaded", async function() {
 
     let scrollCap = 5;
     let currScroll = 0;
-    window.onscroll = function(e) {
 
-        if (currScroll == scrollCap){
+    let scrollAmt = 0;
+    let lastScroll = 0;
+    window.onscroll = function(e) {
+        scrollAmt += Math.abs(window.scrollY - lastScroll);
+        if (scrollAmt > 3000){
             moveDivToCenter(getRandomFloatingDiv());
-            scrollCap = 9 + parseInt(20*Math.random());
-            currScroll = 0;
+            scrollAmt = 0;
         }
-        // console.log(currScroll)
-        currScroll++;
+        lastScroll = window.scrollY;
       }
 
   
