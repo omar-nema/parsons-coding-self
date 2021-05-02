@@ -92,4 +92,8 @@ body {
   .card {
       font-size: 24px;
   };
+  body {
+      height: auto;
+      min-height: -webkit-fill-available;
+  }
 }
