@@ -1,5 +1,8 @@
 
+let globalAudio = new Audio('./audioAmbientDesk.mp3');
+
 document.addEventListener("DOMContentLoaded", async function(){
+
  
   let sketchNoise = function(p) {
 
@@ -59,12 +62,7 @@ document.addEventListener("DOMContentLoaded", async function(){
     createDiv(audio, file.title, file.notes);
   });
 
-
-  let globalAudio =new Audio('./audiosample.m4a');
-  document.addEventListener('click', ()=> {
-    globalAudio.play();
-  })
-
+  
   let tooltip = document.querySelector('#audio-tooltip');
   function showTooltip(e, title, notes){
   
@@ -99,8 +97,29 @@ document.addEventListener("DOMContentLoaded", async function(){
     document.querySelector('body').appendChild(audioDiv);
   };
 
-let node = document.createElement('div');
-new p5(sketchNoise, 'fullCanvas');
+  let node = document.createElement('div');
+  new p5(sketchNoise, 'fullCanvas');
+
+
+  document.querySelector('.help-btn').addEventListener('click', ()=> {
+    let helpInfo = document.querySelector('.help-info');
+    helpInfo.classList.toggle('hidden');
+    setTimeout(() => {
+      helpInfo.classList.toggle('hidden');
+    }, 5000);
+  });
+
+  document.querySelector('.btn.proceed').addEventListener('click', ()=>{
+
+    var context = new AudioContext();
+
+    context.resume().then(() => {
+      globalAudio.play();
+      ;document.querySelector('.modal-overlay').classList.toggle('hidden')
+    });
+
+  
+  });
   
 });
 

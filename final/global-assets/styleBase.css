@@ -53,4 +53,21 @@ h1 {
   -webkit-filter: brightness(85%);
           filter: brightness(85%);
 }
+
+.btn {
+  padding: 5px 10px;
+  color: white;
+  text-decoration: none;
+  background: #414040;
+  cursor: pointer;
+  -webkit-transition: -webkit-filter .1s linear;
+  transition: -webkit-filter .1s linear;
+  transition: filter .1s linear;
+  transition: filter .1s linear, -webkit-filter .1s linear;
+}
+
+.btn:hover {
+  -webkit-filter: brightness(85%);
+          filter: brightness(85%);
+}
 /*# sourceMappingURL=styleBase.css.map */

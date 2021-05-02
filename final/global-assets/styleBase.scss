@@ -49,3 +49,15 @@ main {
 .back-btn:hover {
   filter: brightness(85%);
 }
+
+.btn {
+  padding: 5px 10px;
+  color: white;
+  text-decoration: none;
+  background: #414040;
+  cursor: pointer;
+  transition: filter .1s linear;
+}
+.btn:hover {
+  filter: brightness(85%);
+}
