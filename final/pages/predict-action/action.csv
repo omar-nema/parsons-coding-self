@@ -5,7 +5,7 @@ check instagram,1,0.5,0.3,0.5,0,0.8
 play ambient music,0,0,0,1,1,0
 play catchy music. ,1,1,1,0,0.5,0.1
 consider watching a new tv show or a movie. but watch something mindless instead.,0.7,0.2,0.1,1,0,0.8
-cook. Just throw the things in the pan and make something and eat it.,0.7,0.5,0.5,0.5,0,0.8
+cook. just throw the things in the pan and make something and eat it.,0.7,0.5,0.5,0.5,0,0.8
 cook with intention,0.2,0.5,0.6,0.3,1,0.1
 order takeout,0.7,0.2,0.5,0.7,0,0.5
 snack on crackers you don't really even like,1,0.5,0.5,0.5,0.5,0.7
@@ -23,4 +23,3 @@ play nintendo switch,1,0.5,0.3,0.3,0.5,0.6
 water plants,0.8,0.5,0.5,0.5,0.8,0.2
 fold clothing,0.8,0.5,0.5,0.5,0.3,0.7
 start boiling kettle to make tea. decide: too caffeinated already. go on a walk.,0.9,0.7,0.5,0.5,0.3,0.7
-make coffee,0,0,0.5,0.5,0.3,0

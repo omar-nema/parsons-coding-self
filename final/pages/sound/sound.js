@@ -1,5 +1,6 @@
 
 let globalAudio = new Audio('./audioAmbientDesk.mp3');
+globalAudio.loop = true;
 
 document.addEventListener("DOMContentLoaded", async function(){
 
@@ -44,7 +45,7 @@ document.addEventListener("DOMContentLoaded", async function(){
         p.noStroke();
         for (let y=0; y<numRows;y++){
           for (let x=0; x<numCols; x++){  
-            let col = p.map(p.noise(x*.02, y*.02, p.frameCount*.009), 0, 1, 0, 255);
+            let col = p.map(p.noise(x*.02, y*.02, p.frameCount*.009), 0, 1, 0, 240);
             p.fill(col);
             p.stroke(col);
             p.rect(x*unitW, y*unitH, unitW, unitH);
@@ -106,7 +107,7 @@ document.addEventListener("DOMContentLoaded", async function(){
     helpInfo.classList.toggle('hidden');
     setTimeout(() => {
       helpInfo.classList.toggle('hidden');
-    }, 5000);
+    }, 8000);
   });
 
   document.querySelector('.btn.proceed').addEventListener('click', ()=>{

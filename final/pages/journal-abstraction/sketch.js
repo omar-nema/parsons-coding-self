@@ -12,14 +12,14 @@ document.addEventListener("DOMContentLoaded", async function() {
     function createGroupText(groupNum){
         el = getGroupElement(groupNum);
         let elText = '';
-        for (var j=0; j<el.heightfactor*3; j++){
+        for (var j=0; j<el.heightfactor*2.5; j++){
             elText += el.trend + '. ';
         }
         return `<div class="entry-text">${elText}</div>`;
     }
     
     function createEntry(date){
-        let groupStructure = [[0, 1], [1, parseInt(Math.random()*10)], [2, 1]];
+        let groupStructure = [[0, 1], [1, parseInt(Math.random()*7)], [2, 1]];
         let entryStart = `<div class="entry"><div class='entry-date'>${date}</div>`
         let entryText = '';
         groupStructure.forEach(d=> {
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", async function() {
             .style('left', `${parseInt(Math.random()*divObj.center.x)}px`)
             .on('end', d=> {
                 setTimeout(()=>{
-                    sel.transition().duration(300).style('opacity', '0').on('end', e=> {
+                    sel.transition().duration(1000).style('opacity', '0').on('end', e=> {
                         sel.style('left', `${parseInt(-50 - Math.random()*300)}px`)
                         .style('top', `${parseInt(-50 - Math.random()*300)}px`)
                         .style('opacity', 1)
@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", async function() {
     let lastScroll = 0;
     window.onscroll = function(e) {
         scrollAmt += Math.abs(window.scrollY - lastScroll);
-        if (scrollAmt > 3000){
+        if (scrollAmt > 1500){
             moveDivToCenter(getRandomFloatingDiv());
             scrollAmt = 0;
         }
