@@ -51,10 +51,16 @@ body {
 }
 
 .btn.info {
+    right: 100px;
+}
+.btn.back {
+    right: 50px;
+}
+
+.btn.back, .btn.info {
     position: fixed;
     top: 50px;
-    right: 50px;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 500;
     box-shadow: 0 1px 3px 0 rgb(0, 0, 0);
     padding: 5px 12px;
@@ -95,5 +101,12 @@ body {
   body {
       height: auto;
       min-height: -webkit-fill-available;
+  }
+  .btn.back {
+      display: none;
+  }
+  .btn.info {
+      top: 30px;
+      right: 30px;
   }
 }

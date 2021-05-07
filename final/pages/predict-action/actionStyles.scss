@@ -3,6 +3,7 @@
 * {
     box-sizing: border-box;
 }
+
 .cards {
     display: flex;
     justify-content: space-between;
@@ -82,10 +83,26 @@
     display: flex;
     flex-basis: 60%;
 }
-
 .btn-submit{
     cursor: pointer;
 }
 .btn-submit:hover {
     filter: brightness(90%);
 }
+
+@media (max-width: 700px) {
+    .cards {
+        flex-direction: column;
+    }
+    .card {
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+    .slider-label {
+        flex-basis: 60%;
+    }
+    .card.result .card-body {
+        font-size: 16px;
+    }
+  }
+  

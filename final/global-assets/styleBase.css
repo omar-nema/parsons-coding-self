@@ -70,4 +70,16 @@ h1 {
   -webkit-filter: brightness(85%);
           filter: brightness(85%);
 }
+
+@media (max-width: 700px) {
+  h1 {
+    font-size: 18px;
+  }
+  .back-btn {
+    font-size: 14px;
+  }
+  main {
+    padding-top: 20px;
+  }
+}
 /*# sourceMappingURL=styleBase.css.map */

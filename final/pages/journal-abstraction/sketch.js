@@ -58,8 +58,8 @@ document.addEventListener("DOMContentLoaded", async function() {
     function createFloatingDiv(txt){
         d3.select('main').append('div').attr('class', 'floating-text')
             .text(txt)
-            .style('left', `${parseInt(-100 - Math.random()*300)}px`)
-            .style('top', `${parseInt(-100 - Math.random()*300)}px`)
+            .style('left', `${parseInt(-200 - Math.random()*300)}px`)
+            .style('top', `${parseInt(-200 - Math.random()*300)}px`)
     };
     function initDivs(){
         floatingData.forEach(d=> {

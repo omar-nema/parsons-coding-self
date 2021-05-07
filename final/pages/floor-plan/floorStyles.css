@@ -54,6 +54,35 @@ h1 {
           filter: brightness(85%);
 }
 
+.btn {
+  padding: 5px 10px;
+  color: white;
+  text-decoration: none;
+  background: #414040;
+  cursor: pointer;
+  -webkit-transition: -webkit-filter .1s linear;
+  transition: -webkit-filter .1s linear;
+  transition: filter .1s linear;
+  transition: filter .1s linear, -webkit-filter .1s linear;
+}
+
+.btn:hover {
+  -webkit-filter: brightness(85%);
+          filter: brightness(85%);
+}
+
+@media (max-width: 700px) {
+  h1 {
+    font-size: 18px;
+  }
+  .back-btn {
+    font-size: 14px;
+  }
+  main {
+    padding-top: 20px;
+  }
+}
+
 body {
   font-size: 14px;
 }
@@ -104,4 +133,9 @@ svg g {
 /* rect:hover {
   fill: green;
 } */
+@media (max-width: 700px) {
+  main {
+    padding-top: 20px;
+  }
+}
 /*# sourceMappingURL=floorStyles.css.map */
