@@ -6,21 +6,15 @@ body {
 }
 
 * {
-  font-family: 'Space Grotesk';
+  font-family: "Space Grotesk";
   margin: 0;
   padding: 0;
 }
 
 header {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 50px;
 }
 
@@ -43,15 +37,11 @@ h1 {
   padding: 5px 10px;
   background: #414040;
   cursor: pointer;
-  -webkit-transition: -webkit-filter .1s linear;
-  transition: -webkit-filter .1s linear;
-  transition: filter .1s linear;
-  transition: filter .1s linear, -webkit-filter .1s linear;
+  transition: filter 0.1s linear;
 }
 
 .back-btn:hover {
-  -webkit-filter: brightness(85%);
-          filter: brightness(85%);
+  filter: brightness(85%);
 }
 
 .btn {
@@ -60,32 +50,28 @@ h1 {
   text-decoration: none;
   background: #414040;
   cursor: pointer;
-  -webkit-transition: -webkit-filter .1s linear;
-  transition: -webkit-filter .1s linear;
-  transition: filter .1s linear;
-  transition: filter .1s linear, -webkit-filter .1s linear;
+  transition: filter 0.1s linear;
 }
 
 .btn:hover {
-  -webkit-filter: brightness(85%);
-          filter: brightness(85%);
+  filter: brightness(85%);
 }
 
 @media (max-width: 700px) {
   h1 {
     font-size: 18px;
   }
+
   .back-btn {
     font-size: 14px;
   }
+
   main {
     padding-top: 20px;
   }
 }
-
 * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 img {
@@ -110,9 +96,9 @@ main {
   img {
     max-width: 95%;
   }
+
   .back-btn {
     top: 18px;
     right: 40px;
   }
-}
-/*# sourceMappingURL=seeStyles.css.map */
+}/*# sourceMappingURL=seeStyles.css.map */
